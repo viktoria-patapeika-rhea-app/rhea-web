@@ -18,5 +18,7 @@ class RheaWebColor {
   // Shadows
   static BoxShadow logoShadow = BoxShadow(
       color: semanticRedColor.withOpacity(0.6), offset: const Offset(0, 4), blurRadius: 250, spreadRadius: 500);
+  static BoxShadow bottomShadow = BoxShadow(
+      color: semanticGreenColor.withOpacity(0.6), offset: const Offset(0, 4), blurRadius: 160, spreadRadius: 300);
   // Gradients
 }
