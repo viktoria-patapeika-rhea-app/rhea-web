@@ -52,23 +52,23 @@ class _RheaWebAppBarState extends State<RheaWebAppBar> {
               //  onTap: () => onTap!(RheaWebRoutes.aboutPageRoute),
               onTap: () => changePage(RheaWebAppBarItem.aboutUs, RheaWebRoutes.aboutPageRoute),
               isSelected: appBarItem == RheaWebAppBarItem.aboutUs),
-          GestureDetector(
-            onTap: () => widget.onButtonTap(),
-            child: Container(
-              decoration: const BoxDecoration(
-                  color: RheaWebColor.semanticWhiteColor, borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                child: Row(children: [
-                  Text(RheaWebText.contactButtonTitle, style: RheaWebFont.regularFont),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12),
-                    child: SvgPicture.asset(RheaWebText.iconPathArrowDiagonal, color: RheaWebColor.semanticWhiteColor),
-                  )
-                ]),
-              ),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: () => widget.onButtonTap(),
+          //   child: Container(
+          //     decoration: const BoxDecoration(
+          //         color: RheaWebColor.semanticWhiteColor, borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius)),
+          //     child: Padding(
+          //       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          //       child: Row(children: [
+          //         Text(RheaWebText.contactButtonTitle, style: RheaWebFont.regularFont),
+          //         Padding(
+          //           padding: const EdgeInsets.only(left: 12),
+          //           child: SvgPicture.asset(RheaWebText.iconPathSpark, color: RheaWebColor.semanticWhiteColor),
+          //         )
+          //       ]),
+          //     ),
+          //   ),
+          // ),
         ])
       ]),
     );

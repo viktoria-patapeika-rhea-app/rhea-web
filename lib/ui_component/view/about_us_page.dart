@@ -33,17 +33,20 @@ class AboutUsPage extends StatelessWidget {
                 child: Text(RheaWebText.aboutUsPageSubtitle,
                     style: RheaWebFont.regularFont.copyWith(color: RheaWebColor.semanticWhiteColor)),
               ),
-              ListView.builder(
-                  itemCount: RheaWebText.aboutUsQuestionList.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, int) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 44),
-                      child: RheaWebQuestionContainer(question: RheaWebText.aboutUsQuestionList[int]),
-                    );
-                  })
+              Padding(
+                padding: const EdgeInsets.only(bottom: 72),
+                child: ListView.builder(
+                    itemCount: RheaWebText.aboutUsQuestionList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, int) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 44),
+                        child: RheaWebQuestionContainer(question: RheaWebText.aboutUsQuestionList[int]),
+                      );
+                    }),
+              )
             ]),
           ),
         ),

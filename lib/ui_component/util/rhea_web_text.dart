@@ -6,6 +6,7 @@ class RheaWebText {
   static const String iconPathArrowDiagonal = 'assets/icons/arrow_diagonal.svg';
   static const String iconPathPlus = 'assets/icons/plus.svg';
   static const String iconPathMinus = 'assets/icons/minus.svg';
+  static const String iconPathSpark = 'assets/icons/spark.svg';
   // PNG
   static const String imagePathMock1 = 'assets/mock_1.png';
   static const String imagePathMock2 = 'assets/mock_2.png';
