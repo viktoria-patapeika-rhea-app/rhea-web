@@ -13,18 +13,17 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: RheaWebColor.semanticPurpleColor,
-      body: Stack(children: [
-        Container(decoration: BoxDecoration(boxShadow: [RheaWebColor.logoShadow]), height: 1, width: 1),
-        
+    return Material(
+      color: RheaWebColor.semanticPurpleColor,
+      child: Stack(children: [
+        Positioned(
+            bottom: 0,
+            right: 0,
+            child: Container(decoration: BoxDecoration(boxShadow: [RheaWebColor.logoShadow]), height: 1, width: 1)),
         SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(44, 0, 44, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              RheaWebAppBar(),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.only(top: 44),
                 child: Text('About us', style: RheaWebFont.logoFont),

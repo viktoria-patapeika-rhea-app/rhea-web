@@ -14,7 +14,7 @@ class RheaWebText {
   static const String logo = 'Rhea.ai';
   static const String contactButtonTitle = 'Get involved';
   static const String teaserTitle = 'Coming Soon';
-  static const String landingPageTitle = 'Gen notified about updates and releases';
+  static const String landingPageTitle = 'Get notified about updates and releases';
   static const String submitEmailTitle = 'Notify Me';
   static const String submitEmailHint = 'Enter your email address';
   static const String submittedEmailTitle = 'Subscribed!';

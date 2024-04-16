@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter/material.dart';
@@ -16,18 +17,20 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: RheaWebColor.semanticPurpleColor,
-      body: Stack(children: [
-        Container(decoration: BoxDecoration(boxShadow: [RheaWebColor.logoShadow]), height: 1, width: 1),
+    return Material(
+      color: RheaWebColor.semanticPurpleColor,
+      child: Stack(children: [
+        Positioned(
+            bottom: 0,
+            right: 0,
+            child: Container(decoration: BoxDecoration(boxShadow: [RheaWebColor.logoShadow]), height: 1, width: 1)),
         SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(44, 0, 44, 0),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: Column(children: [
-              RheaWebAppBar(),
               Flex(
                   direction: deviceSize.width > 1280 ? Axis.horizontal : Axis.vertical,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
@@ -38,11 +41,11 @@ class _LandingPageState extends State<LandingPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 12),
-                              child: Container(height: 3, width: 36, color: RheaWebColor.semanticPinkColor),
+                              child: Container(height: 3, width: 36, color: RheaWebColor.semanticWhiteColor),
                             ),
                             Text(RheaWebText.teaserTitle,
                                 style: RheaWebFont.lightFont
-                                    .copyWith(color: RheaWebColor.semanticPinkColor, fontWeight: FontWeight.w700)),
+                                    .copyWith(color: RheaWebColor.semanticWhiteColor, fontWeight: FontWeight.w700)),
                           ],
                         ),
                         Padding(
@@ -60,10 +63,10 @@ class _LandingPageState extends State<LandingPage> {
                       ]),
                     ),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Image(image: AssetImage(RheaWebText.imagePathMock2), height: deviceSize.height * 0.6),
+                      Image(image: AssetImage(RheaWebText.imagePathMock2), height: deviceSize.height * 0.5),
                       Padding(
                         padding: const EdgeInsets.only(left: 40),
-                        child: Image(image: AssetImage(RheaWebText.imagePathMock1), height: deviceSize.height * 0.8),
+                        child: Image(image: AssetImage(RheaWebText.imagePathMock1), height: deviceSize.height * 0.7),
                       ),
                     ]),
                   ]),
@@ -75,13 +78,11 @@ class _LandingPageState extends State<LandingPage> {
   }
 }
 
-
-
 // TODOo: change to get_it
 
 class SubmitEmailButton extends StatefulWidget {
   const SubmitEmailButton({super.key, required this.onSubmited});
-   final VoidCallback onSubmited;
+  final VoidCallback onSubmited;
 
   @override
   State<SubmitEmailButton> createState() => _SubmitEmailButtonState();
