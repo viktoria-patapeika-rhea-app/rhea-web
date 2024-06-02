@@ -4,6 +4,7 @@ class RheaWebColor {
   // Primary colors
   static const Color primaryColor = semanticWhiteColor;
   static const Color backgroundColor = Color(0xff1A237E);
+  static const Color cardBackgroundColor = Color(0xff283593);
   // Semantic colors
   static const Color semanticWhiteColor = Colors.white;
   static const Color semanticRedColor = Color(0xffFF6F61);

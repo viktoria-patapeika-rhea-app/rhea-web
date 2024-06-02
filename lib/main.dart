@@ -1,9 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rhea_ai_website/blocs/app_bar_bloc/app_bar_bloc.dart';
-import 'package:rhea_ai_website/repository/about_us_page_repository.dart';
+import 'package:rhea_ai_website/blocs/app_bar_bloc/footer_bloc.dart';
+import 'package:rhea_ai_website/repository/faq_page_repository.dart';
+import 'package:rhea_ai_website/repository/features_page_repository.dart';
 import 'package:rhea_ai_website/repository/landing_page_repository.dart';
+import 'package:rhea_ai_website/repository/pricing_page_repository.dart';
+import 'package:rhea_ai_website/repository/privacy_policy_page_repository.dart';
+import 'package:rhea_ai_website/repository/team_page_repository.dart';
+import 'package:rhea_ai_website/repository/terms_page_repository.dart';
 import 'package:rhea_ai_website/ui_component/view/app_page.dart';
 import 'package:rhea_ai_website/ui_component/view/landing_page.dart';
 
@@ -23,10 +28,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BlocProvider<RheaWebAppBarBloc>(
-        create: (context) => RheaWebAppBarBloc(
+      home: BlocProvider<RheaWebFooterBloc>(
+        create: (context) => RheaWebFooterBloc(
           landingPageRepository: LandingPageRepository(),
-          aboutUsPageRepository: AboutUsPageRepository(),
+          featuresPageRepository: FeaturesPageRepository(),
+          faqPageRepository: FAQPageRepository(),
+          pricingPageRepository: PricingPageRepository(),
+          privacyPolicyPageRepository: PrivacyPagePageRepository(),
+          termsPageRepository: TermsPageRepository(),
+          teamPageRepository: TeamPageRepository(),
         )..add(AppStarted()),
         child: const AppPage(),
       ),
