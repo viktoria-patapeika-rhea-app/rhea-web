@@ -1,0 +1,3 @@
+[submodule "rhea_web_ai"]
+    path = rhea_web_ai
+    url = https://github.com/viktoria-patapeika-rhea-app/rhea-app.com
