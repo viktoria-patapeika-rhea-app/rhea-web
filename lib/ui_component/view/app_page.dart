@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rhea_ai_website/blocs/app_bar_bloc/footer_bloc.dart';
+import 'package:rhea_ai_website/ui_component/view/features_page.dart';
 import 'package:rhea_ai_website/ui_component/view/pricing_page.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_color.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_routes.dart';
@@ -36,7 +37,7 @@ class _AppPageState extends State<AppPage> {
               RheaWebAppBar(
                 key: _jumpKey,
                 onGetInvolvedTap: () {
-                   context.read<RheaWebFooterBloc>().add(const PageTapped(namedRoute: RheaWebRoutes.teamPageRoute));
+                  context.read<RheaWebFooterBloc>().add(const PageTapped(namedRoute: RheaWebRoutes.teamPageRoute));
                 },
               ),
               BlocBuilder<RheaWebFooterBloc, RheaWebFooterState>(
@@ -51,7 +52,7 @@ class _AppPageState extends State<AppPage> {
                     }
                     if (state is FeaturesPageLoaded) {
                       debugPrint('features loaded');
-                      return const LandingPage();
+                      return FeaturesPage();
                     }
                     if (state is FAQPageLoaded) {
                       debugPrint('faq loaded');
@@ -59,7 +60,7 @@ class _AppPageState extends State<AppPage> {
                     }
                     if (state is PricingPageLoaded) {
                       debugPrint('pricing loaded');
-                      return  PricingPage();
+                      return PricingPage();
                     }
                     if (state is PrivacyPolicyPageLoaded) {
                       debugPrint('privacy policy loaded');
@@ -78,9 +79,7 @@ class _AppPageState extends State<AppPage> {
                   }),
               const Divider(height: 3, color: RheaWebColor.cardBackgroundColor),
               RheaWebFooter(
-                onEmailSubmit: () {
-                 
-                },
+                onEmailSubmit: () {},
                 onPageNavigation: (namedRoute) {
                   context.read<RheaWebFooterBloc>().add(PageTapped(namedRoute: namedRoute));
                   Scrollable.ensureVisible(_jumpKey.currentContext!, duration: const Duration(seconds: 1));

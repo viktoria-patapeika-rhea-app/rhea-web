@@ -6,8 +6,11 @@ class RheaWebText {
   // SVG
   static const String iconPathChevronDown = 'assets/icons/chevron_down.svg';
   static const String iconPathChevronRight = 'assets/icons/chevron_right.svg';
-  static const String iconPathCheck='assets/icons/check.svg';
-  static const String iconPathClose='assets/icons/close.svg';
+  static const String iconPathCheck = 'assets/icons/check.svg';
+  static const String iconPathClose = 'assets/icons/close.svg';
+  static const String iconPathArrowDown = 'assets/icons/arrow_down.svg';
+  static const String iconPathArrowUp = 'assets/icons/arrow_up.svg';
+  static const String iconPathProgressIndicator='assets/icons/progress_indicator.svg';
   // buttons
   static const String iconPathGetInvolved = 'assets/icons/plain.svg';
   // flow explained
@@ -21,7 +24,7 @@ class RheaWebText {
   static const String iconPathEmpowerment = 'assets/icons/heart.svg';
   static const String iconPathTransparency = 'assets/icons/hand.svg';
   static const String iconPathPrivacy = 'assets/icons/shield.svg';
-  // progress 
+  // progress
   static const String iconPathProgressDesign = 'assets/icons/pallete.svg';
   static const String iconPathProgressDevelopment = 'assets/icons/code.svg';
   static const String iconPathProgressTesting = 'assets/icons/test_tube.svg';
@@ -85,5 +88,30 @@ class RheaWebText {
     'Testing':
         'Once that\'s done, we\'ll be testing the app thoroughly to make sure it\'s stable, secure, and, of course, user-friendly.',
     'Release': 'Keep an eye out for the release date – we can\'t wait to share it with you!',
+  };
+
+  static const Map<String, String> faqGeneral = {
+    'What is the purpose of this app?':
+        'Our app is all about empowering women by offering personalized workout plans that sync with their menstrual cycle. We use advanced AI technology to ensure you get the best fitness results.',
+    'How does the app work?':
+        'The app creates customized workout plans based on your menstrual cycle and fitness goals. It also tracks your progress and adjusts the workouts to match your hormonal cycle phases.',
+    'Is the app free to use?':
+        'Yes, the app has a free version with basic features. If you want more advanced features, like workout regeneration and customization, you can upgrade to our premium version. See more at "Pricing"',
+    'How do I track my menstrual cycle with the app?':
+        'You can input your menstrual cycle data in the app\'s tracking section. The app will then customize your workout plans according to different cycle phases.',
+    'Can I use the app if I have health conditions that affect my cycle, like PCOS':
+        'Yes, you can select your health conditions in the "Health conditions" settings, and we will tailor your workout plans to ensure they are safe and effective for you.',
+  };
+
+  static const Map<String, String> faqTechnicalSupport = {
+    'How do I report a bug or technical issue?':
+        'You can report bugs or technical issues by emailing info@rhea-app.com.',
+  };
+
+  static const Map<String, String> faqAdditional = {
+    'Can I use the app without an internet connection?':
+        'Some features of the app require an internet connection, but basic functionalities like viewing saved workouts can be accessed offline.',
+    'How can I provide feedback or suggest new features?':
+        'We appreciate your feedback and suggestions. You can submit your ideas by emailing info@rhea-app.com.',
   };
 }

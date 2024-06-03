@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_routes.dart';
 
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RheaWebFooter extends StatelessWidget {
   RheaWebFooter({super.key, required this.onEmailSubmit, required this.onPageNavigation});
@@ -21,12 +22,12 @@ class RheaWebFooter extends StatelessWidget {
     'Terms of Service': RheaWebRoutes.termsPageRoute,
     'Join our team': RheaWebRoutes.teamPageRoute,
   };
-  final List<String> socialMediaLinks = [
-    RheaWebText.iconPathLinkedinLogo,
-    RheaWebText.iconPathInstagramLogo,
-    RheaWebText.iconPathFacebookLogo,
-    RheaWebText.iconPathTiktokLogo
-  ];
+  final Map<String, String> socialMediaLinks = {
+    RheaWebText.iconPathLinkedinLogo: 'https://www.linkedin.com/company/102444016/',
+    RheaWebText.iconPathInstagramLogo: 'https://www.instagram.com/rheaai.app?igsh=MXZrdjdjZmpkbzQ1eA%3D%3D&utm_source=qr',
+    RheaWebText.iconPathFacebookLogo: '',
+    RheaWebText.iconPathTiktokLogo: ''
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +87,15 @@ class RheaWebFooter extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 22),
                       itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.only(right: 22),
-                            child: SvgPicture.asset(
-                              socialMediaLinks[index],
+                            child: GestureDetector(
+                              onTap: () async {
+                                if (!await launchUrl(Uri.parse(socialMediaLinks.values.elementAt(index)))) {
+                                  throw Exception('Could not launch ${socialMediaLinks.values.elementAt(index)}');
+                                }
+                              },
+                              child: SvgPicture.asset(
+                                socialMediaLinks.keys.elementAt(index),
+                              ),
                             ),
                           )),
                 ),
