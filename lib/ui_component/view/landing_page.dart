@@ -254,7 +254,7 @@ class _LandingPageState extends State<LandingPage> {
                 padding: const EdgeInsets.only(bottom: 72),
                 child: Stack(children: [
                  const Padding(
-                    padding: const EdgeInsets.fromLTRB(106,106,106,0),
+                    padding: const EdgeInsets.fromLTRB(116,132,116,0),
                     
                     child: Divider(height: 3,
                       color: RheaWebColor.semanticWhiteColor,

@@ -6,6 +6,8 @@ class RheaWebText {
   // SVG
   static const String iconPathChevronDown = 'assets/icons/chevron_down.svg';
   static const String iconPathChevronRight = 'assets/icons/chevron_right.svg';
+  static const String iconPathCheck='assets/icons/check.svg';
+  static const String iconPathClose='assets/icons/close.svg';
   // buttons
   static const String iconPathGetInvolved = 'assets/icons/plain.svg';
   // flow explained

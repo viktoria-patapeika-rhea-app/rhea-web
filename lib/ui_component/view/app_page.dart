@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rhea_ai_website/blocs/app_bar_bloc/footer_bloc.dart';
-import 'package:rhea_ai_website/ui_component/pricing_page.dart';
+import 'package:rhea_ai_website/ui_component/view/pricing_page.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_color.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_routes.dart';
 import 'package:rhea_ai_website/ui_component/view/faq_page.dart';
@@ -35,7 +35,9 @@ class _AppPageState extends State<AppPage> {
             children: [
               RheaWebAppBar(
                 key: _jumpKey,
-                onGetInvolvedTap: () {},
+                onGetInvolvedTap: () {
+                   context.read<RheaWebFooterBloc>().add(const PageTapped(namedRoute: RheaWebRoutes.teamPageRoute));
+                },
               ),
               BlocBuilder<RheaWebFooterBloc, RheaWebFooterState>(
                   bloc: appBarBloc,
@@ -57,7 +59,7 @@ class _AppPageState extends State<AppPage> {
                     }
                     if (state is PricingPageLoaded) {
                       debugPrint('pricing loaded');
-                      return const PricingPage();
+                      return  PricingPage();
                     }
                     if (state is PrivacyPolicyPageLoaded) {
                       debugPrint('privacy policy loaded');
@@ -77,7 +79,7 @@ class _AppPageState extends State<AppPage> {
               const Divider(height: 3, color: RheaWebColor.cardBackgroundColor),
               RheaWebFooter(
                 onEmailSubmit: () {
-                  context.read<RheaWebFooterBloc>().add(const PageTapped(namedRoute: RheaWebRoutes.teamPageRoute));
+                 
                 },
                 onPageNavigation: (namedRoute) {
                   context.read<RheaWebFooterBloc>().add(PageTapped(namedRoute: namedRoute));
