@@ -1,0 +1,31 @@
+name: Rhea.ai deploy
+
+on:
+  push:
+    branches:
+      - main  # Change this if you are using a different branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '2.10.0' # Specify your Flutter version
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Build web app
+      run: flutter build web
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build/web
