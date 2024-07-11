@@ -52,7 +52,7 @@ class _AppPageState extends State<AppPage> {
                     }
                     if (state is FeaturesPageLoaded) {
                       debugPrint('features loaded');
-                      return FeaturesPage();
+                      return const FeaturesPage();
                     }
                     if (state is FAQPageLoaded) {
                       debugPrint('faq loaded');

@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:rhea_ai_website/dto/rhea_web_question.dart';
 
 class RheaWebText {
   // Assets

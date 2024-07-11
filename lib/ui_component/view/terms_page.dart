@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:rhea_ai_website/ui_component/util/rhea_web_font.dart';
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
 
 class TermsPage extends StatelessWidget {

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_routes.dart';
 
@@ -117,13 +115,13 @@ class RheaWebFooter extends StatelessWidget {
                       child: Row(
                         children: [
                           SizedBox(
+                              width: 310,
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Enter your email',
                                     hintStyle: RheaWebFont.smallFont),
-                              ),
-                              width: 310),
+                              )),
                           GestureDetector(
                             onTap: onEmailSubmit,
                             child: Container(

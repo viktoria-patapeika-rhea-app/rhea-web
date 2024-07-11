@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:rhea_ai_website/ui_component/util/rhea_web_color.dart';
-import 'package:rhea_ai_website/ui_component/util/rhea_web_font.dart';
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
 
 class PricingPage extends StatelessWidget {

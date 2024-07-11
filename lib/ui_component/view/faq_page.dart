@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_color.dart';
@@ -23,7 +22,7 @@ class FAQPage extends StatelessWidget {
                 itemCount: RheaWebText.faqGeneral.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => FAQBox(
                     question: RheaWebText.faqGeneral.keys.elementAt(index),
                     answer: RheaWebText.faqGeneral.values.elementAt(index))),
@@ -39,7 +38,7 @@ class FAQPage extends StatelessWidget {
               itemCount: RheaWebText.faqTechnicalSupport.length,
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => FAQBox(
                   question: RheaWebText.faqTechnicalSupport.keys.elementAt(index),
                   answer: RheaWebText.faqTechnicalSupport.values.elementAt(index))),
@@ -54,7 +53,7 @@ class FAQPage extends StatelessWidget {
               itemCount: RheaWebText.faqAdditional.length,
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => FAQBox(
                   question: RheaWebText.faqAdditional.keys.elementAt(index),
                   answer: RheaWebText.faqAdditional.values.elementAt(index))),

@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter/material.dart';
@@ -148,7 +146,7 @@ class _LandingPageState extends State<LandingPage> {
                           colors: [RheaWebColor.backgroundColor.withOpacity(0), RheaWebColor.backgroundColor],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          stops: [0, 0.7]),
+                          stops: const [0, 0.7]),
                     ),
                   ),
                 ],
@@ -254,7 +252,7 @@ class _LandingPageState extends State<LandingPage> {
                 padding: const EdgeInsets.only(bottom: 72),
                 child: Stack(children: [
                  const Padding(
-                    padding: const EdgeInsets.fromLTRB(116,132,116,0),
+                    padding: EdgeInsets.fromLTRB(116,132,116,0),
                     
                     child: Divider(height: 3,
                       color: RheaWebColor.semanticWhiteColor,
@@ -331,7 +329,7 @@ class LandingPageProgressItem extends StatelessWidget {
                   ]))),
         ),
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 220),
+          constraints: const BoxConstraints(maxWidth: 220),
           child: Text(
             itemDescription,
             style: RheaWebFont.smallFont,
