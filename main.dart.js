@@ -83844,7 +83844,7 @@ P(a){var s=null
 return A.e1(A.a([new A.aN(B.dd,A.bv(u.b,s,s,s,s,s,$.iY(),s,s),s),new A.aN(B.ec,A.ed("assets/icons/progress_indicator.svg",s,s),s)],t.p),B.V,B.P)}}
 A.yG.prototype={
 am(){var s="assets/icons/magic_stick.svg",r=t.s
-return new A.RE(A.AN(),new A.c9(null,t.re),A.a([s,"assets/icons/heart.svg","assets/icons/hand.svg","assets/icons/shield.svg"],r),A.a(["assets/icons/calendar.svg","assets/icons/dumbbell.svg",s,"assets/icons/graph.svg"],r),A.a(["assets/icons/pallete.svg","assets/icons/code.svg","assets/icons/test_tube.svg","assets/icons/rocket.svg"],r),B.k)}}
+return new A.RE(A.AN(),new A.c9(null,t.re),A.a([s,s,"assets/icons/hand.svg","assets/icons/shield.svg"],r),A.a(["assets/icons/calendar.svg","assets/icons/dumbbell.svg",s,"assets/icons/graph.svg"],r),A.a(["assets/icons/pallete.svg","assets/icons/code.svg","assets/icons/test_tube.svg","assets/icons/rocket.svg"],r),B.k)}}
 A.RE.prototype={
 P(a7){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3=this,a4=null,a5=A.cH(a7,a4,t.w).w.a.a,a6=a5<600
 if(a6)s=1
