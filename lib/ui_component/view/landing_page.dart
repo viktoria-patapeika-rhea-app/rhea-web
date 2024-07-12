@@ -16,7 +16,9 @@ class _LandingPageState extends State<LandingPage> {
   final GlobalKey _jumpKey = GlobalKey();
   List<String> valueIconList = [
     RheaWebText.iconPathPersonalizatoin,
-    RheaWebText.iconPathEmpowerment,
+   // RheaWebText.iconPathEmpowerment,
+
+    RheaWebText.iconPathPersonalizatoin,
     RheaWebText.iconPathTransparency,
     RheaWebText.iconPathPrivacy
   ];
