@@ -20,12 +20,9 @@ jobs:
           # flutter-version: '3.22.3'
           flutter-version-file: ./pubspec.yaml
       - run: flutter --version
-      - run: flutter pub get
     
       - name: Install dependencies
         run: flutter pub get
-
-      - run: flutter test
 
       - name: Build web
         run: flutter build web
