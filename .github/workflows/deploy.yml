@@ -18,8 +18,10 @@ jobs:
         with:
           channel: stable
           # flutter-version: '3.22.3'
-          flutter-version-file: pubscpec.yaml
+          flutter-version-file: ./pubscpec.yaml
       - run: flutter --version
+      - run: flutter pub get
+    
       - name: Install dependencies
         run: flutter pub get
 
