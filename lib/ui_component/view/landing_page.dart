@@ -16,7 +16,7 @@ class _LandingPageState extends State<LandingPage> {
   final GlobalKey _jumpKey = GlobalKey();
   List<String> valueIconList = [
     RheaWebText.iconPathPersonalizatoin,
-   // RheaWebText.iconPathEmpowerment,
+    // RheaWebText.iconPathEmpowerment,
 
     RheaWebText.iconPathPersonalizatoin,
     RheaWebText.iconPathTransparency,
@@ -95,7 +95,8 @@ class _LandingPageState extends State<LandingPage> {
                                 child: Text('Discover',
                                     style: RheaWebFont.regularFont.copyWith(color: RheaWebColor.semanticRedColor)),
                               ),
-                              SvgPicture.asset(RheaWebText.iconPathChevronDown, color: RheaWebColor.semanticRedColor)
+                              SvgPicture.asset(RheaWebText.iconPathChevronDown,
+                                  colorFilter: const ColorFilter.mode(RheaWebColor.semanticRedColor, BlendMode.srcIn))
                             ],
                           ),
                         ),
@@ -253,10 +254,10 @@ class _LandingPageState extends State<LandingPage> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 72),
                 child: Stack(children: [
-                 const Padding(
-                    padding: EdgeInsets.fromLTRB(116,132,116,0),
-                    
-                    child: Divider(height: 3,
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(116, 132, 116, 0),
+                    child: Divider(
+                      height: 3,
                       color: RheaWebColor.semanticWhiteColor,
                     ),
                   ),
@@ -359,17 +360,14 @@ class LandingPageCard extends StatefulWidget {
 class _LandingPageCardState extends State<LandingPageCard> {
   @override
   Widget build(BuildContext context) {
-    bool isCardHoveredOn = false;
+    // bool isCardHoveredOn = false;
     return IntrinsicHeight(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: RheaWebColor.cardBackgroundColor,
-            borderRadius: const BorderRadius.all(RheaWebBorder.buttonRadius),
+            borderRadius:  BorderRadius.all(RheaWebBorder.buttonRadius),
             boxShadow: [
-              BoxShadow(
-                  color: isCardHoveredOn ? RheaWebColor.semanticRedColor.withOpacity(0.25) : Colors.transparent,
-                  blurRadius: 4,
-                  offset: const Offset(0, 4)),
+              BoxShadow(color: Colors.transparent, blurRadius: 4, offset:  Offset(0, 4)),
             ]),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),

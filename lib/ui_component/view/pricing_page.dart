@@ -92,17 +92,22 @@ class PricingPageFeatureComparison extends StatelessWidget {
       children: [
         Text(featureTitle, style: RheaWebFont.smallFont),
         Row(children: [
-          SvgPicture.asset(avaiability.keys.elementAt(0) ? RheaWebText.iconPathCheck : RheaWebText.iconPathClose,
-              color: avaiability.keys.elementAt(0) == true
-                  ? RheaWebColor.semanticGreenColor
-                  : RheaWebColor.semanticRedColor),
+          SvgPicture.asset(
+            avaiability.keys.elementAt(0) ? RheaWebText.iconPathCheck : RheaWebText.iconPathClose,
+            colorFilter: ColorFilter.mode(
+                avaiability.keys.elementAt(0) == true ? RheaWebColor.semanticGreenColor : RheaWebColor.semanticRedColor,
+                BlendMode.srcIn),
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 126),
             child: SvgPicture.asset(
-                avaiability.values.elementAt(0) ? RheaWebText.iconPathCheck : RheaWebText.iconPathClose,
-                color: avaiability.values.elementAt(0) == true
-                    ? RheaWebColor.semanticGreenColor
-                    : RheaWebColor.semanticRedColor),
+              avaiability.values.elementAt(0) ? RheaWebText.iconPathCheck : RheaWebText.iconPathClose,
+              colorFilter: ColorFilter.mode(
+                  avaiability.keys.elementAt(0) == true
+                      ? RheaWebColor.semanticGreenColor
+                      : RheaWebColor.semanticRedColor,
+                  BlendMode.srcIn),
+            ),
           )
         ]),
       ],

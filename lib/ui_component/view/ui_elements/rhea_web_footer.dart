@@ -22,14 +22,15 @@ class RheaWebFooter extends StatelessWidget {
   };
   final Map<String, String> socialMediaLinks = {
     RheaWebText.iconPathLinkedinLogo: 'https://www.linkedin.com/company/102444016/',
-    RheaWebText.iconPathInstagramLogo: 'https://www.instagram.com/rheaai.app?igsh=MXZrdjdjZmpkbzQ1eA%3D%3D&utm_source=qr',
+    RheaWebText.iconPathInstagramLogo:
+        'https://www.instagram.com/rheaai.app?igsh=MXZrdjdjZmpkbzQ1eA%3D%3D&utm_source=qr',
     RheaWebText.iconPathFacebookLogo: '',
     RheaWebText.iconPathTiktokLogo: ''
   };
 
   @override
   Widget build(BuildContext context) {
-    Size deviceSize = MediaQuery.of(context).size;
+    // Size deviceSize = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 44),
       child: LayoutBuilder(builder: (context, constraints) {
@@ -130,7 +131,8 @@ class RheaWebFooter extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(12),
                                 child: SvgPicture.asset(RheaWebText.iconPathChevronRight,
-                                    color: RheaWebColor.cardBackgroundColor),
+                                    colorFilter:
+                                        const ColorFilter.mode(RheaWebColor.cardBackgroundColor, BlendMode.srcIn)),
                               ),
                             ),
                           )
