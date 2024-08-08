@@ -30,7 +30,7 @@ class RheaWebFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Size deviceSize = MediaQuery.of(context).size;
+    Size deviceSize = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 44),
       child: LayoutBuilder(builder: (context, constraints) {
@@ -41,9 +41,9 @@ class RheaWebFooter extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Image.asset(RheaWebText.imagePathLogo, height: 37),
+                Image.asset(RheaWebText.imagePathLogo, width: deviceSize.width <= 820 ? deviceSize.width * 0.2 : 156),
                 Padding(
-                  padding: const EdgeInsets.only(top: 12),
+                  padding: const EdgeInsets.only(top: 20, bottom: 20),
                   child: Text(RheaWebText.footerLogoSubtitle, style: RheaWebFont.smallFont),
                 )
               ]),

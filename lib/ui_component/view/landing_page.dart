@@ -93,10 +93,13 @@ class _LandingPageState extends State<LandingPage> {
                               Padding(
                                 padding: const EdgeInsets.only(right: 12),
                                 child: Text('Discover',
-                                    style: RheaWebFont.regularFont.copyWith(color: RheaWebColor.semanticRedColor)),
+                                    style: RheaWebFont.regularFont
+                                        .copyWith(color: RheaWebColor.semanticRedColor.withOpacity(0.7))),
                               ),
                               SvgPicture.asset(RheaWebText.iconPathChevronDown,
-                                  colorFilter: const ColorFilter.mode(RheaWebColor.semanticRedColor, BlendMode.srcIn))
+                                  height: 24,
+                                  colorFilter:
+                                      ColorFilter.mode(RheaWebColor.semanticRedColor.withOpacity(0.7), BlendMode.srcIn))
                             ],
                           ),
                         ),
@@ -143,7 +146,7 @@ class _LandingPageState extends State<LandingPage> {
                       ]),
                   Container(
                     width: deviceSize.width,
-                    height: deviceSize.width * .65,
+                    height: deviceSize.width * .7,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                           colors: [RheaWebColor.backgroundColor.withOpacity(0), RheaWebColor.backgroundColor],
@@ -161,8 +164,9 @@ class _LandingPageState extends State<LandingPage> {
                     crossAxisCount: cardsCrossAxisCount,
                     crossAxisSpacing: 44,
                     mainAxisSpacing: 44,
-                    childAspectRatio: 0.7,
+                    childAspectRatio: 0.65,
                     shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     children: [
                       LandingPageCard(
                         cardTitle: RheaWebText.landingPageFlowText.keys.elementAt(0).toString(),
@@ -215,8 +219,9 @@ class _LandingPageState extends State<LandingPage> {
                     crossAxisCount: cardsCrossAxisCount,
                     crossAxisSpacing: 44,
                     mainAxisSpacing: 44,
-                    childAspectRatio: 0.6,
+                    childAspectRatio: 0.65,
                     shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     children: [
                       LandingPageCard(
                         cardTitle: RheaWebText.landingPageValuesText.keys.elementAt(0).toString(),
@@ -254,8 +259,20 @@ class _LandingPageState extends State<LandingPage> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 72),
                 child: Stack(children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(116, 132, 116, 0),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        deviceSize.width < 600
+                            ? 36
+                            : deviceSize.width < 1300
+                                ? 116
+                                : 216,
+                        132,
+                        deviceSize.width < 600
+                            ? 36
+                            : deviceSize.width < 1300
+                                ? 116
+                                : 216,
+                        0),
                     child: Divider(
                       height: 3,
                       color: RheaWebColor.semanticWhiteColor,

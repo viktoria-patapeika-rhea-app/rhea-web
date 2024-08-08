@@ -10,11 +10,12 @@ class RheaWebAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size deviceSize = MediaQuery.of(context).size;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset(RheaWebText.imagePathLogo, height: 37),
+        Image.asset(RheaWebText.imagePathLogo, width: deviceSize.width <= 820 ? deviceSize.width * 0.2 : 156),
         GestureDetector(
           onTap: onGetInvolvedTap,
           child: Container(
