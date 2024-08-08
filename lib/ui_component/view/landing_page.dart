@@ -365,9 +365,9 @@ class _LandingPageCardState extends State<LandingPageCard> {
       child: Container(
         decoration: const BoxDecoration(
             color: RheaWebColor.cardBackgroundColor,
-            borderRadius:  BorderRadius.all(RheaWebBorder.buttonRadius),
+            borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius),
             boxShadow: [
-              BoxShadow(color: Colors.transparent, blurRadius: 4, offset:  Offset(0, 4)),
+              BoxShadow(color: Colors.transparent, blurRadius: 4, offset: Offset(0, 4)),
             ]),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
