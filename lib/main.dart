@@ -19,7 +19,7 @@ class SimpleBlocObserver extends BlocObserver {
 }
 
 void main() async {
-  usePathUrlStrategy();
+ // usePathUrlStrategy();
   Bloc.observer = SimpleBlocObserver();
   runApp(const App());
 }
