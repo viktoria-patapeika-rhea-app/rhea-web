@@ -19,6 +19,8 @@ class RheaWebFont {
       fontSize: regularFontSize, color: RheaWebColor.regularTextColor, fontWeight: regularFontWeight);
   static TextStyle smallFont =
       GoogleFonts.openSans(fontSize: smallFontSize, color: RheaWebColor.regularTextColor, fontWeight: FontWeight.w200);
+  static TextStyle smallFontBold = GoogleFonts.openSans(
+      fontSize: smallFontSize, color: RheaWebColor.regularTextColor, fontWeight: regularFontWeight);
   static TextStyle titleFont =
       GoogleFonts.openSans(fontSize: titleFontSize, color: RheaWebColor.regularTextColor, fontWeight: titleFontWeight);
 }

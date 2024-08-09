@@ -266,7 +266,8 @@ class _LandingPageState extends State<LandingPage> {
                             : deviceSize.width < 1300
                                 ? 116
                                 : 216,
-                        132,
+                        deviceSize.width >= 600
+                            ? 132:122,
                         deviceSize.width < 600
                             ? 36
                             : deviceSize.width < 1300
@@ -329,6 +330,7 @@ class LandingPageProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size deviceSize = MediaQuery.of(context).size;
     return Expanded(
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Padding(
@@ -339,8 +341,8 @@ class LandingPageProgressItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 22),
           child: Container(
-              height: 72,
-              width: 72,
+              height: deviceSize.width >= 600 ? 72 : 52,
+              width:  deviceSize.width >= 600 ? 72 : 52,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: RadialGradient(colors: [
@@ -349,7 +351,7 @@ class LandingPageProgressItem extends StatelessWidget {
                   ]))),
         ),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 220),
+          constraints: const BoxConstraints(maxWidth: 210),
           child: Text(
             itemDescription,
             style: RheaWebFont.smallFont,

@@ -24,16 +24,18 @@ class RheaWebAppBar extends StatelessWidget {
               borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+              padding: EdgeInsets.symmetric(
+                  vertical: deviceSize.width >= 600 ? 12 : 10, horizontal: deviceSize.width >= 600 ? 24 : 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 12),
-                    child: Text(RheaWebText.headerButtonTitle, style: RheaWebFont.regularFont),
+                    child: Text(RheaWebText.headerButtonTitle,
+                        style: deviceSize.width >= 600 ? RheaWebFont.regularFont : RheaWebFont.smallFontBold),
                   ),
-                  SvgPicture.asset(RheaWebText.iconPathGetInvolved)
+                  SvgPicture.asset(RheaWebText.iconPathGetInvolved, height: deviceSize.width >= 600 ? 20 : 14)
                 ],
               ),
             ),
