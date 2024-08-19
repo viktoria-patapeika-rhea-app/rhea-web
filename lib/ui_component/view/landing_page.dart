@@ -5,6 +5,7 @@ import 'dart:math' show pi;
 
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_algorithm_illustration.dart';
+import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_daily_updates_illustration.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -18,8 +19,14 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
+    double illustrationSize= deviceSize.width > 720 ? deviceSize.width * .3 : deviceSize.width * 0.6;
 
-    List<Widget> illustrations = [AlgorithmIllustration(maxSize: deviceSize.width * .3),AlgorithmIllustration(maxSize: deviceSize.width * .3),AlgorithmIllustration(maxSize: deviceSize.width * .3),AlgorithmIllustration(maxSize: deviceSize.width * .3),];
+    List<Widget> illustrations = [
+      AlgorithmIllustration(maxSize: illustrationSize),
+      DailyUpdatesIllustration(maxSize:illustrationSize),
+      AlgorithmIllustration(maxSize: illustrationSize),
+      AlgorithmIllustration(maxSize: illustrationSize),
+    ];
 
     return Material(
       color: RheaWebColor.backgroundColor,
@@ -59,14 +66,14 @@ class _LandingPageState extends State<LandingPage> {
                           color: RheaWebColor.semanticRedColor,
                           borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius)),
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(36, 12, 24, 12),
+                        padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 12),
-                              child: Text('Discover',
+                              child: Text('Become a Beta Tester',
                                   style: RheaWebFont.regularFont.copyWith(color: RheaWebColor.regularTextColor)),
                             ),
                             SvgPicture.asset(RheaWebText.iconPathChevronDown,
@@ -89,7 +96,7 @@ class _LandingPageState extends State<LandingPage> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: 4,
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(bottom: 72),
+              padding: const EdgeInsets.only(bottom: 96),
               child: LandingFlowItem(
                 direction: deviceSize.width > 720 ? Axis.horizontal : Axis.vertical,
                 illustration: illustrations[index],
@@ -125,6 +132,7 @@ class LandingFlowItem extends StatelessWidget {
     return Flex(
       direction: direction,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
           padding: EdgeInsets.only(bottom: direction == Axis.vertical ? 66 : 0),
