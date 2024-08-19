@@ -43,7 +43,7 @@ class _LandingPageState extends State<LandingPage> {
                       colors: [RheaWebColor.semanticRedColor, RheaWebColor.backgroundColor],
                     ))),
             SizedBox(
-              width: deviceSize.width * 0.5,
+              width: deviceSize.width * 0.7,
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(
                   RheaWebText.landingPageTitle,
