@@ -12,35 +12,35 @@ class RheaWebAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(RheaWebText.imagePathLogo, width: deviceSize.width <= 820 ? deviceSize.width * 0.2 : 156),
-        GestureDetector(
-          onTap: onGetInvolvedTap,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: RheaWebColor.cardBackgroundColor,
-              borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: deviceSize.width >= 600 ? 12 : 10, horizontal: deviceSize.width >= 600 ? 24 : 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: Text(RheaWebText.headerButtonTitle,
-                        style: deviceSize.width >= 600 ? RheaWebFont.regularFont : RheaWebFont.smallFontBold),
-                  ),
-                  SvgPicture.asset(RheaWebText.iconPathGetInvolved, height: deviceSize.width >= 600 ? 20 : 14)
-                ],
-              ),
-            ),
-          ),
-        ),
+        // GestureDetector(
+        //   onTap: onGetInvolvedTap,
+        //   child: Container(
+        //     decoration: const BoxDecoration(
+        //       color: RheaWebColor.cardBackgroundColor,
+        //       borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius),
+        //     ),
+        //     child: Padding(
+        //       padding: EdgeInsets.symmetric(
+        //           vertical: deviceSize.width >= 600 ? 12 : 10, horizontal: deviceSize.width >= 600 ? 24 : 20),
+        //       child: Row(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         crossAxisAlignment: CrossAxisAlignment.center,
+        //         children: [
+        //           Padding(
+        //             padding: const EdgeInsets.only(right: 12),
+        //             child: Text(RheaWebText.headerButtonTitle,
+        //                 style: deviceSize.width >= 600 ? RheaWebFont.regularFont : RheaWebFont.smallFontBold),
+        //           ),
+        //           SvgPicture.asset(RheaWebText.iconPathGetInvolved, height: deviceSize.width >= 600 ? 20 : 14)
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

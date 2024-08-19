@@ -10,6 +10,7 @@ import 'package:rhea_ai_website/repository/team_page_repository.dart';
 import 'package:rhea_ai_website/repository/terms_page_repository.dart';
 import 'package:rhea_ai_website/ui_component/view/app_page.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:rhea_ai_website/ui_component/view/landing_page.dart';
 
 class SimpleBlocObserver extends BlocObserver {
   @override
@@ -29,18 +30,20 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BlocProvider<RheaWebFooterBloc>(
-        create: (context) => RheaWebFooterBloc(
-          landingPageRepository: LandingPageRepository(),
-          featuresPageRepository: FeaturesPageRepository(),
-          faqPageRepository: FAQPageRepository(),
-          pricingPageRepository: PricingPageRepository(),
-          privacyPolicyPageRepository: PrivacyPagePageRepository(),
-          termsPageRepository: TermsPageRepository(),
-          teamPageRepository: TeamPageRepository(),
-        )..add(AppStarted()),
-        child: const AppPage(),
-      ),
+      title: 'Rhea.ai',
+      home: AppPage(),
+      // home: BlocProvider<RheaWebFooterBloc>(
+      //   create: (context) => RheaWebFooterBloc(
+      //     landingPageRepository: LandingPageRepository(),
+      //     featuresPageRepository: FeaturesPageRepository(),
+      //     faqPageRepository: FAQPageRepository(),
+      //     pricingPageRepository: PricingPageRepository(),
+      //     privacyPolicyPageRepository: PrivacyPagePageRepository(),
+      //     termsPageRepository: TermsPageRepository(),
+      //     teamPageRepository: TeamPageRepository(),
+      //   )..add(AppStarted()),
+      //   child: const AppPage(),
+      // ),
     );
   }
 }

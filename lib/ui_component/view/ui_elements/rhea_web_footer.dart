@@ -44,25 +44,25 @@ class RheaWebFooter extends StatelessWidget {
                 Image.asset(RheaWebText.imagePathLogo, width: deviceSize.width <= 820 ? deviceSize.width * 0.2 : 156),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 20),
-                  child: Text(RheaWebText.footerLogoSubtitle, style: RheaWebFont.smallFont),
+                  child: Text(RheaWebText.footerLogoSubtitle, style: RheaWebFont.smallFontBold),
                 )
               ]),
-              SizedBox(
-                height: 350,
-                width: 150,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: pages.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 22),
-                    child: GestureDetector(
-                        onTap: () => onPageNavigation!(pages.values.elementAt(index)),
-                        child: Text(pages.keys.elementAt(index), style: RheaWebFont.regularFont)),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 350,
+              //   width: 150,
+              //   child: ListView.builder(
+              //     shrinkWrap: true,
+              //     itemCount: pages.length,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     scrollDirection: Axis.vertical,
+              //     itemBuilder: (context, index) => Padding(
+              //       padding: const EdgeInsets.only(bottom: 22),
+              //       child: GestureDetector(
+              //           onTap: () => onPageNavigation!(pages.values.elementAt(index)),
+              //           child: Text(pages.keys.elementAt(index), style: RheaWebFont.regularFont)),
+              //     ),
+              //   ),
+              // ),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('Contact Us', style: RheaWebFont.regularFont),
                 Padding(
