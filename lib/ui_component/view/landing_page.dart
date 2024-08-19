@@ -6,6 +6,7 @@ import 'dart:math' show pi;
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_algorithm_illustration.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_daily_updates_illustration.dart';
+import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_health_metrics_illustration.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -25,7 +26,7 @@ class _LandingPageState extends State<LandingPage> {
       AlgorithmIllustration(maxSize: illustrationSize),
       DailyUpdatesIllustration(maxSize:illustrationSize),
       AlgorithmIllustration(maxSize: illustrationSize),
-      AlgorithmIllustration(maxSize: illustrationSize),
+      RheaWebHealthMetricsIllustration(maxSize: illustrationSize),
     ];
 
     return Material(
@@ -106,6 +107,8 @@ class _LandingPageState extends State<LandingPage> {
               ),
             ),
           ),
+          Text(RheaWebText.landingPageBetaTestTitle, style: RheaWebFont.titleSmallFont),
+          Text(RheaWebText.landingPageBetaTestDescription, style: RheaWebFont.regularFont),
         ],
       )),
     );

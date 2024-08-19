@@ -13,7 +13,7 @@ class RheaWebText {
   // flow explained
   static const String iconPathTreadmill = 'assets/icons/treadmill.svg';
   static const String iconPathDrop = 'assets/icons/drop.svg';
-
+  static const String iconPathCheckSolo = 'assets/icons/check_solo.svg';
 
   static const String iconPathFlowStep1 = 'assets/icons/calendar.svg';
   static const String iconPathFlowStep2 = 'assets/icons/dumbbell.svg';
@@ -71,4 +71,10 @@ class RheaWebText {
     'Track Your Fitness and Health Progress':
         'Let\'s kick things off by sharing your fitness goals and preferences, as well as any health conditions you have. The more details you provide, the better we can tailor your experience!',
   };
+
+  static const String landingPageBetaTestTitle = 'Join Our Beta-Testing Community Now!';
+  static const String landingPageBetaTestDescription =
+      'As one of our awesome beta testers, you\'ll get to try out our newest features early through TestFlight, receive special updates about upcoming releases, and enjoy premium features for free. Your feedback is super important and will help shape the future of our app!';
+  static const String landingPageBetaTestWarning =
+      'By providing your email, you agree to receive updates and communications about our beta-testing program, including information on upcoming releases and access to premium features through TestFlight. We respect your privacy and will not share your information with third parties. You can unsubscribe at any time.';
 }
