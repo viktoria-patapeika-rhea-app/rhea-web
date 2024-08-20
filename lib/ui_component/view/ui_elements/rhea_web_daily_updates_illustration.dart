@@ -13,7 +13,7 @@ class DailyUpdatesIllustration extends StatefulWidget {
   State<DailyUpdatesIllustration> createState() => _DailyUpdatesIllustrationState();
 }
 
-class _DailyUpdatesIllustrationState extends State<DailyUpdatesIllustration> with SingleTickerProviderStateMixin {
+class _DailyUpdatesIllustrationState extends State<DailyUpdatesIllustration> with TickerProviderStateMixin {
   late AnimationController _controllerActivity;
   late AnimationController _controllerFlow;
   late Animation<double> _animationActivity;
