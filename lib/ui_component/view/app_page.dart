@@ -18,17 +18,18 @@ class _AppPageState extends State<AppPage> {
   final GlobalKey _jumpKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    Size deviceSize = MediaQuery.of(context).size;
+    double horizontalPadding = deviceSize.width > 720 ? 96 : deviceSize.width * 26;
     return Material(
       color: RheaWebColor.backgroundColor,
       child: SingleChildScrollView(
-      //  controller: _scrollController,
+        //  controller: _scrollController,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 44, horizontal: 96),
+          padding: EdgeInsets.symmetric(vertical: 44, horizontal: horizontalPadding),
           child: Column(
             children: [
               RheaWebAppBar(
-                onGetInvolvedTap: () {
-                },
+                onGetInvolvedTap: () {},
               ),
               LandingPage(),
               const Divider(height: 3, color: RheaWebColor.cardBackgroundColor),
