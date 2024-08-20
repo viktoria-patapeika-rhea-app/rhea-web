@@ -75574,9 +75574,8 @@ O(a){return new A.xE(new A.v8(null),"Rhea.ai",null)}}
 A.v8.prototype={
 al(){return new A.MH(new A.bL(null,t.G))}}
 A.MH.prototype={
-O(a){var s=null,r=A.cq(a,s,t.w).w.a.a,q=r>720?96:r*26
-r=t.N
-return A.xD(B.aH,s,A.asF(new A.bw(new A.az(q,44,q,44),A.h6(A.b([new A.Kd(s),new A.xf(s),B.Em,new A.Ke(new A.acA(),A.aJ(["About","/home","Features","/features","FAQ","/faq","Pricing","/pricing","Privacy Policy","/privacyPolicy","Terms of Service","/terms","Join our team","/team"],r,r),A.aJ(["assets/icons/linkedin_logo.svg","https://www.linkedin.com/company/102444016/","assets/icons/instagram_logo.svg","https://www.instagram.com/rheaai.app?igsh=MXZrdjdjZmpkbzQ1eA%3D%3D&utm_source=qr","assets/icons/facebook_logo.svg","","assets/icons/tiktok_logo.svg",""],r,r),s)],t.E),B.aF,B.Z,B.aa),s)),B.p,B.cf,0,s,s,s,s,B.eg)}}
+O(a){var s=null,r=A.cq(a,s,t.w).w.a.a>720?96:26,q=t.N
+return A.xD(B.aH,s,A.asF(new A.bw(new A.az(r,44,r,44),A.h6(A.b([new A.Kd(s),new A.xf(s),B.Em,new A.Ke(new A.acA(),A.aJ(["About","/home","Features","/features","FAQ","/faq","Pricing","/pricing","Privacy Policy","/privacyPolicy","Terms of Service","/terms","Join our team","/team"],q,q),A.aJ(["assets/icons/linkedin_logo.svg","https://www.linkedin.com/company/102444016/","assets/icons/instagram_logo.svg","https://www.instagram.com/rheaai.app?igsh=MXZrdjdjZmpkbzQ1eA%3D%3D&utm_source=qr","assets/icons/facebook_logo.svg","","assets/icons/tiktok_logo.svg",""],q,q),s)],t.E),B.aF,B.Z,B.aa),s)),B.p,B.cf,0,s,s,s,s,B.eg)}}
 A.acA.prototype={
 $0(){},
 $S:0}
