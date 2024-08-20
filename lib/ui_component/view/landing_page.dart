@@ -1,12 +1,14 @@
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' show pi;
 
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_algorithm_illustration.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_daily_updates_illustration.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_health_metrics_illustration.dart';
+import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_preferences_illustration.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -17,14 +19,27 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   final GlobalKey _jumpKey = GlobalKey();
+  final _formKey = GlobalKey<FormState>();
+  String? _name;
+  String? _email;
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      print('Name: $_name');
+      print('Email: $_email');
+      // send the data to backend
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
-    double illustrationSize= deviceSize.width > 720 ? deviceSize.width * .3 : deviceSize.width * 0.6;
+    double illustrationSize = deviceSize.width > 720 ? deviceSize.width * .3 : deviceSize.width * 0.6;
 
     List<Widget> illustrations = [
-      AlgorithmIllustration(maxSize: illustrationSize),
-      DailyUpdatesIllustration(maxSize:illustrationSize),
+      RheaWebPreferencesIllustration(maxSize: illustrationSize),
+      DailyUpdatesIllustration(maxSize: illustrationSize),
       AlgorithmIllustration(maxSize: illustrationSize),
       RheaWebHealthMetricsIllustration(maxSize: illustrationSize),
     ];
@@ -32,9 +47,7 @@ class _LandingPageState extends State<LandingPage> {
     return Material(
       color: RheaWebColor.backgroundColor,
       child: SingleChildScrollView(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Stack(alignment: AlignmentDirectional.centerStart, children: [
             Container(
                 height: 720,
@@ -44,7 +57,7 @@ class _LandingPageState extends State<LandingPage> {
                       colors: [RheaWebColor.semanticRedColor, RheaWebColor.backgroundColor],
                     ))),
             SizedBox(
-              width: deviceSize.width * 0.7,
+              width: deviceSize.width * 0.8,
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(
                   RheaWebText.landingPageTitle,
@@ -107,10 +120,109 @@ class _LandingPageState extends State<LandingPage> {
               ),
             ),
           ),
-          Text(RheaWebText.landingPageBetaTestTitle, style: RheaWebFont.titleSmallFont),
-          Text(RheaWebText.landingPageBetaTestDescription, style: RheaWebFont.regularFont),
-        ],
-      )),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 66),
+            child: Container(
+              key: _jumpKey,
+              width: deviceSize.width * 0.6,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(RheaWebText.landingPageBetaTestTitle, style: RheaWebFont.titleSmallFont),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 66),
+                      child: Text(RheaWebText.landingPageBetaTestDescription, style: RheaWebFont.regularFont),
+                    ),
+                    Form(
+                      key: _formKey,
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: RheaWebColor.cardBackgroundColor, borderRadius: BorderRadius.circular(32)),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.fromLTRB(32, 12, 4, 12),
+                                focusedBorder: InputBorder.none,
+                                border: InputBorder.none,
+                                label: Text('Enter your name', style: RheaWebFont.regularFont)),
+                            style: RheaWebFont.regularFont,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your name';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _name = value;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 32),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: RheaWebColor.cardBackgroundColor, borderRadius: BorderRadius.circular(32)),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.fromLTRB(32, 12, 4, 12),
+                                  focusedBorder: InputBorder.none,
+                                  border: InputBorder.none,
+                                  label: Text('Enter your email', style: RheaWebFont.regularFont)),
+                              style: RheaWebFont.regularFont,
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your email';
+                                } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                                  return 'Please enter a valid email address';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _email = value;
+                              },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 32),
+                          child: Text(
+                            RheaWebText.landingPageBetaTestWarning,
+                            style: GoogleFonts.openSans(
+                                fontSize: 12,
+                                color: RheaWebColor.regularTextColor,
+                                fontWeight: RheaWebFont.lightFontWeight),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: _submitForm,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                                color: RheaWebColor.semanticRedColor,
+                                borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius)),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                              child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 12),
+                                      child: Text('Join Beta Testers',
+                                          style: RheaWebFont.regularFont.copyWith(color: RheaWebColor.regularTextColor)),
+                                    ),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ]),
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }

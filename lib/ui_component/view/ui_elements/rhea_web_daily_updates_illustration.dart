@@ -14,21 +14,27 @@ class DailyUpdatesIllustration extends StatefulWidget {
 }
 
 class _DailyUpdatesIllustrationState extends State<DailyUpdatesIllustration> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
+  late AnimationController _controllerActivity;
+  late AnimationController _controllerFlow;
+  late Animation<double> _animationActivity;
+  late Animation<double> _animationFlow;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = AnimationController(vsync: this, duration: Duration(seconds: 5))..repeat(reverse: true);
+    _controllerActivity = AnimationController(vsync: this, duration: Duration(seconds: 3))..repeat(reverse: true);
 
-    _animation = Tween<double>(begin: 0.0, end: widget.maxSize - 24).animate(_controller);
+    _animationActivity = Tween<double>(begin: 0.0, end: widget.maxSize - 24).animate(_controllerActivity);
+    _controllerFlow = AnimationController(vsync: this, duration: Duration(seconds: 5))..repeat(reverse: true);
+
+    _animationFlow = Tween<double>(begin: 0.0, end: widget.maxSize - 24).animate(_controllerFlow);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controllerActivity.dispose();
+    _controllerFlow.dispose();
     super.dispose();
   }
 
@@ -39,16 +45,18 @@ class _DailyUpdatesIllustrationState extends State<DailyUpdatesIllustration> wit
     final Color flowAccentColor = RheaWebColor.semanticRedColor;
     return Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
       SizedBox(
-          width: widget.maxSize, child: _buildAnimation(activityAccentColor, baseColor, RheaWebText.iconPathTreadmill)),
+          width: widget.maxSize,
+          child: _buildAnimation(activityAccentColor, baseColor, RheaWebText.iconPathTreadmill, _animationActivity)),
       Padding(
         padding: const EdgeInsets.only(top: 48),
         child: SizedBox(
-            width: widget.maxSize, child: _buildAnimation(flowAccentColor, baseColor, RheaWebText.iconPathDrop)),
+            width: widget.maxSize,
+            child: _buildAnimation(flowAccentColor, baseColor, RheaWebText.iconPathDrop, _animationFlow)),
       ),
     ]);
   }
 
-  Stack _buildAnimation(Color accentColor, Color baseColor, String icon) {
+  Stack _buildAnimation(Color accentColor, Color baseColor, String icon, Animation<double> _animation) {
     return Stack(children: [
       AnimatedBuilder(
           animation: _animation,

@@ -69,7 +69,7 @@ class RheaWebText {
     'Our Advanced AI Algorithm Will Create a Personalized Workout Just for You':
         'Our advanced algorithm will use the information provided to create a personalized workout plan for you. This plan will adapt to your long-term goals and daily inputs, ensuring that you always have a workout that is tailored to your needs. Whether you\'re feeling low on energy or super strong, our goal is to align your workout with your current place on your personal fitness journey.',
     'Track Your Fitness and Health Progress':
-        'Let\'s kick things off by sharing your fitness goals and preferences, as well as any health conditions you have. The more details you provide, the better we can tailor your experience!',
+        'With our app, you can track your progress and see how your body responds to workouts, helping you stay motivated and understand your overall health. We\'re here to guide you towards your goals while considering your unique health needs.',
   };
 
   static const String landingPageBetaTestTitle = 'Join Our Beta-Testing Community Now!';
@@ -77,4 +77,18 @@ class RheaWebText {
       'As one of our awesome beta testers, you\'ll get to try out our newest features early through TestFlight, receive special updates about upcoming releases, and enjoy premium features for free. Your feedback is super important and will help shape the future of our app!';
   static const String landingPageBetaTestWarning =
       'By providing your email, you agree to receive updates and communications about our beta-testing program, including information on upcoming releases and access to premium features through TestFlight. We respect your privacy and will not share your information with third parties. You can unsubscribe at any time.';
+
+  static const List<String> landingPageFlowPreferencesList = [
+    'PCOS',
+    'CARDIO',
+    'MOBILITY',
+    'STAMINA',
+    'HIIT',
+    'YOGA',
+    'PILATES',
+    'HOME',
+    'GYM',
+    'STRETCH', 
+    'TONE',
+  ];
 }

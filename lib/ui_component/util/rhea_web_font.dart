@@ -11,8 +11,9 @@ class RheaWebFont {
   static double subtitleFontSize = deviceWidth <= 720 ? 18 : 22;
   static double regularFontSize = deviceWidth <= 720 ? 14 : 16;
   static double smallFontSize = deviceWidth <= 720 ? 12 : 14;
-  static double titleSmallFontSize=deviceWidth <= 720 ? 26 : 32;
+  static double titleSmallFontSize = deviceWidth <= 720 ? 26 : 32;
   // Font weights
+  static FontWeight lightFontWeight = FontWeight.w200;
   static FontWeight regularFontWeight = FontWeight.w500;
   static FontWeight titleFontWeight = FontWeight.bold;
   // Font styles
@@ -25,6 +26,6 @@ class RheaWebFont {
   static TextStyle titleFont =
       GoogleFonts.openSans(fontSize: titleFontSize, color: RheaWebColor.regularTextColor, fontWeight: titleFontWeight);
 
-  static TextStyle titleSmallFont =
-      GoogleFonts.openSans(fontSize: titleSmallFontSize, color: RheaWebColor.regularTextColor, fontWeight: titleFontWeight);
+  static TextStyle titleSmallFont = GoogleFonts.openSans(
+      fontSize: titleSmallFontSize, color: RheaWebColor.regularTextColor, fontWeight: titleFontWeight);
 }
