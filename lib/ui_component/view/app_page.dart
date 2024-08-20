@@ -19,7 +19,7 @@ class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
-    double horizontalPadding = deviceSize.width > 720 ? 96 : deviceSize.width * 26;
+    double horizontalPadding = deviceSize.width > 720 ? 96 : 26;
     return Material(
       color: RheaWebColor.backgroundColor,
       child: SingleChildScrollView(
