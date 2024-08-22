@@ -74,9 +74,9 @@ class RheaWebText {
 
   static const String landingPageBetaTestTitle = 'Join Our Beta-Testing Community Now!';
   static const String landingPageBetaTestDescription =
-      'As one of our awesome beta testers, you\'ll get to try out our newest features early through TestFlight, receive special updates about upcoming releases, and enjoy premium features for free. Your feedback is super important and will help shape the future of our app!';
+      'As one of our awesome beta testers, you\'ll get to try out our newest features early, receive special updates about upcoming releases, and enjoy premium features for free. Your feedback is super important and will help shape the future of our app!';
   static const String landingPageBetaTestWarning =
-      'By providing your email, you agree to receive updates and communications about our beta-testing program, including information on upcoming releases and access to premium features through TestFlight. We respect your privacy and will not share your information with third parties. You can unsubscribe at any time.';
+      'By providing your email, you agree to receive updates and communications about our beta-testing program, including information on upcoming releases and access to premium features. We respect your privacy and will not share your information with third parties. You can unsubscribe at any time.';
 
   static const List<String> landingPageFlowPreferencesList = [
     'PCOS',
@@ -88,7 +88,21 @@ class RheaWebText {
     'PILATES',
     'HOME',
     'GYM',
-    'STRETCH', 
+    'STRETCH',
     'TONE',
+    'ENERGY',
+    'STRENGTH',
+    'FOCUS',
+    'CORE',
+    'MOOD',
+    'STRESS',
+    'BALANCE',
+    'MORNING',
+    'EVENING',
+    'LOW-IMPACT',
+    'INTERVAL',
+    'ANXIETY',
+    'BACK PAIN',
+    'ENDURANCE',
   ];
 }

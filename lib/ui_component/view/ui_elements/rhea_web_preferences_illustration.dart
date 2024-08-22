@@ -1,6 +1,8 @@
 import 'dart:math';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_color.dart';
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
 
@@ -22,72 +24,56 @@ class _RheaWebPreferencesIllustrationState extends State<RheaWebPreferencesIllus
     RheaWebColor.semanticWhiteColor,
     RheaWebColor.cardBackgroundColor,
   ];
-  final int gridSize = 10;
+  List<Gradient> _gradients = [
+    RadialGradient(
+        colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticGreenColor], radius: 0.6),
+    RadialGradient(colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticRedColor], radius: 0.6),
+    RadialGradient(
+        colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticGreenColor], radius: 0.6),
+    RadialGradient(colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticRedColor], radius: 0.6),
+    RadialGradient(
+        colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticGreenColor], radius: 0.6),
+    RadialGradient(colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticWhiteColor], radius: 0.6),
+  ];
+
   late AnimationController _controller;
-  late List<_TetrisWordBlock> _blocks;
-  late List<Offset> _occupiedPositions;
+  late List<_Bubble> _bubbles;
+  Random random = Random();
 
   @override
   void initState() {
     super.initState();
-
-    _blocks = [];
-    _occupiedPositions = [];
-    _initializeBlocks();
-
     _controller = AnimationController(
       duration: Duration(seconds: 20),
       vsync: this,
     )
       ..addListener(() {
-        setState(() {
-          if (_controller.value == 1.0) {
-            _initializeBlocks();
-            _controller.reset();
-          }
-        });
+        setState(() {});
       })
       ..repeat();
-
-    // _controller.addListener(() {
-    //   setState(() {});
-    // });
-
-    // _controller.forward();
+    _initializeBubbles();
   }
 
-  void _initializeBlocks() {
-    double cellSize = widget.maxSize / gridSize;
-    int startY = 0;
+  void _initializeBubbles() {
+    _bubbles = List.generate(8, (index) => _createBubble());
+  }
 
-    for (String word in _preferences) {
-      int startX = Random().nextInt(gridSize - word.length);
-      List<Offset> wordPositions = [];
+  _Bubble _createBubble() {
+    double size = Random().nextDouble() * 50 + 50;
+    double xPosition = Random().nextDouble() * (widget.maxSize - size);
+    double yPosition = Random().nextDouble() * (widget.maxSize - size);
+    double dx = Random().nextBool() ? 1 : -1;
+    double dy = Random().nextBool() ? 1 : -1;
 
-      for (int i = 0; i < word.length; i++) {
-        Offset position = Offset((startX + i).toDouble(), startY.toDouble());
-        if (!_occupiedPositions.contains(position)) {
-          wordPositions.add(position);
-        }
-      }
-
-      if (wordPositions.length == word.length) {
-        _TetrisWordBlock block = _TetrisWordBlock(
-          word: word,
-          color: _colors[Random().nextInt(_colors.length)],
-          positions: wordPositions,
-          size: cellSize,
-        );
-
-        _blocks.add(block);
-        _occupiedPositions.addAll(wordPositions);
-      } else {
-        debugPrint("Skipping word $word due to overlap");
-      }
-      startY++;
-      if (startY >= gridSize) startY = 0;
-    }
-    debugPrint("Blocks initialized: ${_blocks.length}");
+    return _Bubble(
+      size: size,
+      xPosition: xPosition,
+      yPosition: yPosition,
+      dx: dx,
+      dy: dy,
+      gradient: _gradients[Random().nextInt(_gradients.length)],
+      text: _preferences[Random().nextInt(_preferences.length)],
+    );
   }
 
   @override
@@ -95,75 +81,95 @@ class _RheaWebPreferencesIllustrationState extends State<RheaWebPreferencesIllus
     return Container(
       width: widget.maxSize,
       height: widget.maxSize,
-      color: RheaWebColor.cardBackgroundColor,
       child: Stack(
-        children: _blocks.map((block) {
-          return AnimatedPositioned(
-            left: block.positions.first.dx * block.size,
-            top: block.positions.first.dy * block.size + (_controller.value * widget.maxSize) - widget.maxSize,
-            onEnd: () {
-              setState(() {
-                block.locked = true;
-              });
-            },
-            child: block.locked
-                ? _TetrisWord(block: block)
-                : Transform.rotate(
-                    angle: 0.0,
-                    child: _TetrisWord(block: block),
-                  ),
-            duration: Duration(milliseconds: 500),
+        children: _bubbles.map((bubble) {
+          _moveBubble(bubble);
+          return Positioned(
+            left: bubble.xPosition,
+            top: bubble.yPosition,
+            child: Container(
+              width: bubble.size,
+              height: bubble.size,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: bubble.gradient,
+              ),
+              child: Center(
+                child: Text(
+                  bubble.text,
+                  style: GoogleFonts.montserrat(color: Colors.white, fontSize: bubble.size / 8),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           );
         }).toList(),
       ),
     );
   }
 
+  void _moveBubble(_Bubble bubble) {
+    bubble.xPosition += bubble.dx;
+    bubble.yPosition += bubble.dy;
+
+    if (bubble.xPosition <= 0 || bubble.xPosition + bubble.size >= widget.maxSize) {
+      bubble.dx *= -1;
+    }
+    if (bubble.yPosition <= 0 || bubble.yPosition + bubble.size >= widget.maxSize) {
+      bubble.dy *= -1;
+    }
+  }
+
   @override
   void dispose() {
-    _controller.dispose();
+    for (var bubble in _bubbles) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 }
 
-class _TetrisWord extends StatelessWidget {
-  final _TetrisWordBlock block;
+class _Bubble {
+  double size;
+  double xPosition;
+  double yPosition;
+  double dx;
+  double dy;
+  final String text;
+  Gradient gradient;
 
-  _TetrisWord({required this.block});
+  _Bubble({
+    required this.size,
+    required this.xPosition,
+    required this.yPosition,
+    required this.dx,
+    required this.dy,
+    required this.text,
+    required this.gradient,
+  });
+}
+
+class _BubbleWidget extends StatelessWidget {
+  final _Bubble bubble;
+
+  const _BubbleWidget({required this.bubble});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: block.positions.map((position) {
-        return Positioned(
-          left: (position.dx - block.positions.first.dx) * block.size,
-          top: (position.dy - block.positions.first.dy) * block.size,
-          child: Container(
-            width: block.size,
-            height: block.size,
-            color: block.color,
-            child: Center(
-              child: Text(
-                block.word[block.positions.indexOf(position)],
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: block.size / 2,
-                ),
-              ),
-            ),
-          ),
-        );
-      }).toList(),
+    return Container(
+      width: bubble.size,
+      height: bubble.size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: bubble.gradient,
+      ),
+      child: Center(
+        child: Text(
+          bubble.text,
+          style: GoogleFonts.montserrat(color: Colors.white, fontSize: bubble.size / 8),
+          textAlign: TextAlign.center,
+        ),
+      ),
     );
   }
-}
-
-class _TetrisWordBlock {
-  final String word;
-  final Color color;
-  final List<Offset> positions;
-  final double size;
-  bool locked = false;
-
-  _TetrisWordBlock({required this.word, required this.color, required this.positions, required this.size});
 }

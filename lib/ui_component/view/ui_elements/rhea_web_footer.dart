@@ -25,7 +25,7 @@ class RheaWebFooter extends StatelessWidget {
     RheaWebText.iconPathInstagramLogo:
         'https://www.instagram.com/rheaai.app?igsh=MXZrdjdjZmpkbzQ1eA%3D%3D&utm_source=qr',
     RheaWebText.iconPathFacebookLogo: '',
-    RheaWebText.iconPathTiktokLogo: ''
+    RheaWebText.iconPathTiktokLogo: 'https://www.tiktok.com/@rheaai_?_t=8p1jkb8hcOn&_r=1'
   };
 
   @override

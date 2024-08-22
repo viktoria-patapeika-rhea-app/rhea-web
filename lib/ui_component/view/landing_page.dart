@@ -38,8 +38,8 @@ class _LandingPageState extends State<LandingPage> {
     double illustrationSize = deviceSize.width > 720 ? deviceSize.width * .3 : deviceSize.width * 0.6;
 
     List<Widget> illustrations = [
-     // RheaWebPreferencesIllustration(maxSize: illustrationSize),
-      AlgorithmIllustration(maxSize: illustrationSize),
+      RheaWebPreferencesIllustration(maxSize: illustrationSize),
+     // AlgorithmIllustration(maxSize: illustrationSize),
       DailyUpdatesIllustration(maxSize: illustrationSize),
       AlgorithmIllustration(maxSize: illustrationSize),
       RheaWebHealthMetricsIllustration(maxSize: illustrationSize),
@@ -248,7 +248,7 @@ class LandingFlowItem extends StatelessWidget {
     return Flex(
       direction: direction,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: EdgeInsets.only(bottom: direction == Axis.vertical ? 66 : 0),
