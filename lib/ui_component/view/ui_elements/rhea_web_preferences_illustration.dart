@@ -33,7 +33,8 @@ class _RheaWebPreferencesIllustrationState extends State<RheaWebPreferencesIllus
     RadialGradient(colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticRedColor], radius: 0.6),
     RadialGradient(
         colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticGreenColor], radius: 0.6),
-    RadialGradient(colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticWhiteColor], radius: 0.6),
+    RadialGradient(
+        colors: [RheaWebColor.backgroundColor.withOpacity(0.6), RheaWebColor.semanticWhiteColor], radius: 0.6),
   ];
 
   late AnimationController _controller;
@@ -122,9 +123,7 @@ class _RheaWebPreferencesIllustrationState extends State<RheaWebPreferencesIllus
 
   @override
   void dispose() {
-    for (var bubble in _bubbles) {
-      _controller.dispose();
-    }
+    _controller.dispose();
     super.dispose();
   }
 }
