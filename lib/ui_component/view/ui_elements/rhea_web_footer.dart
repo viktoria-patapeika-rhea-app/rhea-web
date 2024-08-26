@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_routes.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class RheaWebFooter extends StatelessWidget {
+class RheaWebFooter extends StatefulWidget {
   RheaWebFooter({super.key, required this.onEmailSubmit, required this.onPageNavigation});
   final VoidCallback onEmailSubmit;
   final ValueChanged<String>? onPageNavigation;
 
+  @override
+  State<RheaWebFooter> createState() => _RheaWebFooterState();
+}
+
+class _RheaWebFooterState extends State<RheaWebFooter> {
   //final Map<String, MaterialPageRoute> pageLinks = {'About': MaterialPageRoute(builder: (context) => ,)};
   final Map<String, String> pages = {
     'About': RheaWebRoutes.homePageRoute,
@@ -20,6 +25,7 @@ class RheaWebFooter extends StatelessWidget {
     'Terms of Service': RheaWebRoutes.termsPageRoute,
     'Join our team': RheaWebRoutes.teamPageRoute,
   };
+
   final Map<String, String> socialMediaLinks = {
     RheaWebText.iconPathLinkedinLogo: 'https://www.linkedin.com/company/102444016/',
     RheaWebText.iconPathInstagramLogo:
@@ -27,6 +33,53 @@ class RheaWebFooter extends StatelessWidget {
     RheaWebText.iconPathFacebookLogo: '',
     RheaWebText.iconPathTiktokLogo: 'https://www.tiktok.com/@rheaai_?_t=8p1jkb8hcOn&_r=1'
   };
+
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailController = TextEditingController();
+
+  bool _isLoading = false;
+
+  String? _submissionStatus;
+
+  void onEmailSubmit() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+        _submissionStatus = null;
+      });
+
+      final email = _emailController.text;
+
+      final String apiUrl = 'https://your-api-gateway-endpoint';
+
+      try {
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          headers: {'Content-Type': 'application/json'},
+          body: '{"email": "$email"}',
+        );
+
+        if (response.statusCode == 200) {
+          setState(() {
+            _submissionStatus = 'Thank you for subscribing!';
+          });
+        } else {
+          setState(() {
+            _submissionStatus = 'Failed to subscribe.';
+          });
+        }
+      } catch (e) {
+        setState(() {
+          _submissionStatus = 'An error occurred.';
+        });
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,39 +158,65 @@ class RheaWebFooter extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 22),
                   child: Text('Get notified about latest updates and releases.', style: RheaWebFont.smallFont),
                 ),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 400),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius),
-                        color: RheaWebColor.cardBackgroundColor),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(32, 4, 4, 4),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                              width: 310,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Enter your email',
-                                    hintStyle: RheaWebFont.smallFont),
-                              )),
-                          GestureDetector(
-                            onTap: onEmailSubmit,
-                            child: Container(
-                              decoration:
-                                  const BoxDecoration(shape: BoxShape.circle, color: RheaWebColor.semanticWhiteColor),
-                              child: Padding(
-                                padding: const EdgeInsets.all(12),
-                                child: SvgPicture.asset(RheaWebText.iconPathChevronRight,
-                                    colorFilter:
-                                        const ColorFilter.mode(RheaWebColor.cardBackgroundColor, BlendMode.srcIn)),
-                              ),
+                Form(
+                  key: _formKey,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 400),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius),
+                              color: RheaWebColor.cardBackgroundColor),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(32, 4, 4, 4),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 310,
+                                  child: TextFormField(
+                                    controller: _emailController,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Enter your email',
+                                      hintStyle: RheaWebFont.smallFont,
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty || !value.contains('@')) {
+                                        return 'Please enter a valid email';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: _isLoading ? null : onEmailSubmit,
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: RheaWebColor.semanticWhiteColor,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12),
+                                      child: SvgPicture.asset(
+                                        RheaWebText.iconPathChevronRight,
+                                        colorFilter:
+                                            const ColorFilter.mode(RheaWebColor.cardBackgroundColor, BlendMode.srcIn),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        ),
+                        if (_isLoading) CircularProgressIndicator(),
+                        if (_submissionStatus != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(_submissionStatus!),
+                          ),
+                      ],
                     ),
                   ),
                 ),
