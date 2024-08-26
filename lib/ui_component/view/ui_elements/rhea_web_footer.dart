@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rhea_ai_website/ui_component/util/rhea_web_routes.dart';
@@ -43,43 +45,54 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
   String? _submissionStatus;
 
   void onEmailSubmit() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-        _submissionStatus = null;
-      });
+  // Check if the form is valid
+  if (_formKey.currentState!.validate()) {
+    // Show loading state
+    setState(() {
+      _isLoading = true;
+      _submissionStatus = null;
+    });
 
-      final email = _emailController.text;
+    // Get the email from the controller
+    final email = _emailController.text;
 
-      final String apiUrl = 'https://your-api-gateway-endpoint';
+    // Your API Gateway endpoint
+    final String apiUrl = 'https://55phj1v7dk.execute-api.eu-north-1.amazonaws.com/';
 
-      try {
-        final response = await http.post(
-          Uri.parse(apiUrl),
-          headers: {'Content-Type': 'application/json'},
-          body: '{"email": "$email"}',
-        );
+    try {
+      // Make the HTTP POST request
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email}),
+      );
 
-        if (response.statusCode == 200) {
-          setState(() {
-            _submissionStatus = 'Thank you for subscribing!';
-          });
-        } else {
-          setState(() {
-            _submissionStatus = 'Failed to subscribe.';
-          });
-        }
-      } catch (e) {
+      // Check if the request was successful
+      if (response.statusCode == 200) {
+        // Update the state to show success
         setState(() {
-          _submissionStatus = 'An error occurred.';
+          _submissionStatus = 'Thank you for subscribing!';
         });
-      } finally {
+      } else {
+        // Update the state to show failure
         setState(() {
-          _isLoading = false;
+          _submissionStatus = 'Failed to subscribe.';
         });
       }
+    } catch (e) {
+      // Handle any errors that occur during the request
+      setState(() {
+        _submissionStatus = 'An error occurred.';
+      });
+    } finally {
+      // Stop showing the loading state
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,22 +42,36 @@ class _LandingPageState extends State<LandingPage> {
         'email': _email,
       };
 
-      final response = await http.post(
-        Uri.parse('arn:aws:apigateway:eu-north-1::/apis/55phj1v7dk/routes/f5u1iw4'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(data),
-      );
+      try {
+        final response = await http
+            .post(
+              Uri.parse('https://55phj1v7dk.execute-api.eu-north-1.amazonaws.com/'),
+              headers: {'Content-Type': 'application/json'},
+              body: jsonEncode(data),
+            )
+            .timeout(const Duration(seconds: 10));
 
-      if (response.statusCode == 200) {
+        if (response.statusCode == 200) {
+          setState(() {
+            _isSubmitting = false;
+            _isSubmittedSuccessfully = true;
+          });
+        } else {
+          setState(() {
+            _isSubmitting = false;
+          });
+          print('Failed to submit: ${response.statusCode}');
+        }
+      } on TimeoutException {
         setState(() {
           _isSubmitting = false;
-          _isSubmittedSuccessfully = true;
         });
-      } else {
+        print('Request timed out');
+      } catch (e) {
         setState(() {
           _isSubmitting = false;
         });
-        print('Failed to submit');
+        print('Failed to submit: $e');
       }
     }
   }
