@@ -60,7 +60,7 @@ class _RheaWebPreferencesIllustrationState extends State<RheaWebPreferencesIllus
   }
 
   _Bubble _createBubble() {
-    double size = Random().nextDouble() * 50 + 50;
+    double size = Random().nextDouble() * 50 + widget.maxSize/12;
     double xPosition = Random().nextDouble() * (widget.maxSize - size);
     double yPosition = Random().nextDouble() * (widget.maxSize - size);
     double dx = Random().nextBool() ? 1 : -1;
@@ -83,6 +83,7 @@ class _RheaWebPreferencesIllustrationState extends State<RheaWebPreferencesIllus
       width: widget.maxSize,
       height: widget.maxSize,
       child: Stack(
+        alignment: Alignment.center,
         children: _bubbles.map((bubble) {
           _moveBubble(bubble);
           return Positioned(

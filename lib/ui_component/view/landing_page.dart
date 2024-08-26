@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' show pi;
+import 'package:http/http.dart' as http;
 
 import 'package:rhea_ai_website/ui_component/util/utils.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_algorithm_illustration.dart';
@@ -22,13 +25,39 @@ class _LandingPageState extends State<LandingPage> {
   final _formKey = GlobalKey<FormState>();
   String? _name;
   String? _email;
+  bool _isSubmitting = false;
+  bool _isSubmittedSuccessfully = false;
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      print('Name: $_name');
-      print('Email: $_email');
-      // send the data to backend
+
+      setState(() {
+        _isSubmitting = true;
+      });
+
+      final data = {
+        'name': _name,
+        'email': _email,
+      };
+
+      final response = await http.post(
+        Uri.parse('arn:aws:apigateway:eu-north-1::/apis/55phj1v7dk/routes/f5u1iw4'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        setState(() {
+          _isSubmitting = false;
+          _isSubmittedSuccessfully = true;
+        });
+      } else {
+        setState(() {
+          _isSubmitting = false;
+        });
+        print('Failed to submit');
+      }
     }
   }
 
@@ -39,7 +68,6 @@ class _LandingPageState extends State<LandingPage> {
 
     List<Widget> illustrations = [
       RheaWebPreferencesIllustration(maxSize: illustrationSize),
-     // AlgorithmIllustration(maxSize: illustrationSize),
       DailyUpdatesIllustration(maxSize: illustrationSize),
       AlgorithmIllustration(maxSize: illustrationSize),
       RheaWebHealthMetricsIllustration(maxSize: illustrationSize),
@@ -111,9 +139,9 @@ class _LandingPageState extends State<LandingPage> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: 4,
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(bottom: 96),
+              padding: EdgeInsets.only(bottom: deviceSize.width / 5),
               child: LandingFlowItem(
-                direction: deviceSize.width > 720 ? Axis.horizontal : Axis.vertical,
+                direction: deviceSize.width > 760 ? Axis.horizontal : Axis.vertical,
                 illustration: illustrations[index],
                 title: RheaWebText.landingFlow.keys.elementAt(index),
                 description: RheaWebText.landingFlow.values.elementAt(index),
@@ -197,11 +225,16 @@ class _LandingPageState extends State<LandingPage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: _submitForm,
+                          onTap: _isSubmitting ? null : _submitForm,
                           child: Container(
-                            decoration: const BoxDecoration(
-                                color: RheaWebColor.semanticRedColor,
-                                borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius)),
+                            decoration: BoxDecoration(
+                              color: _isSubmittedSuccessfully
+                                  ? RheaWebColor.semanticGreenColor
+                                  : _isSubmitting
+                                      ? RheaWebColor.cardBackgroundColor
+                                      : RheaWebColor.semanticRedColor,
+                              borderRadius: BorderRadius.all(RheaWebBorder.buttonRadius),
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
                               child: Row(
@@ -210,8 +243,14 @@ class _LandingPageState extends State<LandingPage> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(right: 12),
-                                      child: Text('Join Beta Testers',
-                                          style: RheaWebFont.regularFont.copyWith(color: RheaWebColor.regularTextColor)),
+                                      child: Text(
+                                        _isSubmittedSuccessfully
+                                            ? 'Submitted!'
+                                            : _isSubmitting
+                                                ? 'Submitting...'
+                                                : 'Join Beta Testers',
+                                        style: RheaWebFont.regularFont.copyWith(color: RheaWebColor.regularTextColor),
+                                      ),
                                     ),
                                   ]),
                             ),
@@ -248,10 +287,10 @@ class LandingFlowItem extends StatelessWidget {
     return Flex(
       direction: direction,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: direction == Axis.horizontal ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: direction == Axis.vertical ? 66 : 0),
+          padding: EdgeInsets.only(bottom: direction == Axis.vertical ? 72 : 0),
           child: illustration,
         ),
         ConstrainedBox(
@@ -260,7 +299,7 @@ class LandingFlowItem extends StatelessWidget {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(title, style: RheaWebFont.titleSmallFont),
             Padding(
-              padding: const EdgeInsets.only(top: 66),
+              padding: const EdgeInsets.only(top: 72),
               child: Text(description, style: RheaWebFont.regularFont),
             ),
           ]),
