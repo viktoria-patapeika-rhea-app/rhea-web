@@ -32,18 +32,6 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Rhea.ai',
       home: AppPage(),
-      // home: BlocProvider<RheaWebFooterBloc>(
-      //   create: (context) => RheaWebFooterBloc(
-      //     landingPageRepository: LandingPageRepository(),
-      //     featuresPageRepository: FeaturesPageRepository(),
-      //     faqPageRepository: FAQPageRepository(),
-      //     pricingPageRepository: PricingPageRepository(),
-      //     privacyPolicyPageRepository: PrivacyPagePageRepository(),
-      //     termsPageRepository: TermsPageRepository(),
-      //     teamPageRepository: TeamPageRepository(),
-      //   )..add(AppStarted()),
-      //   child: const AppPage(),
-      // ),
     );
   }
 }

@@ -30,9 +30,10 @@ class _LandingPageState extends State<LandingPage> {
   bool _isSubmittedSuccessfully = false;
 
   void _submitForm() async {
+    print('started function');
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-
+      print('running setState');
       setState(() {
         _isSubmitting = true;
       });
@@ -41,6 +42,7 @@ class _LandingPageState extends State<LandingPage> {
         'name': _name,
         'email': _email,
       };
+      print('Got the data: '+data.toString());
 
       try {
         final response = await http
@@ -50,12 +52,16 @@ class _LandingPageState extends State<LandingPage> {
               body: jsonEncode(data),
             )
             .timeout(const Duration(seconds: 10));
+        print('API call finished');
+        print('Response status: ${response.statusCode}');
+        print('Response body: ${response.body}');
 
         if (response.statusCode == 200) {
           setState(() {
             _isSubmitting = false;
             _isSubmittedSuccessfully = true;
           });
+          print('Success');
         } else {
           setState(() {
             _isSubmitting = false;
