@@ -30,10 +30,8 @@ class _LandingPageState extends State<LandingPage> {
   bool _isSubmittedSuccessfully = false;
 
   void _submitForm() async {
-    print('started function');
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      print('running setState');
       setState(() {
         _isSubmitting = true;
       });
@@ -42,17 +40,16 @@ class _LandingPageState extends State<LandingPage> {
         'name': _name,
         'email': _email,
       };
-      print('Got the data: '+data.toString());
 
       try {
         final response = await http
             .post(
-              Uri.parse('https://55phj1v7dk.execute-api.eu-north-1.amazonaws.com/'),
+              Uri.parse('https://55phj1v7dk.execute-api.eu-north-1.amazonaws.com/prod/SubmitBetaTester'),
               headers: {'Content-Type': 'application/json'},
               body: jsonEncode(data),
             )
             .timeout(const Duration(seconds: 10));
-        print('API call finished');
+
         print('Response status: ${response.statusCode}');
         print('Response body: ${response.body}');
 

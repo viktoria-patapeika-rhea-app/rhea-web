@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -40,59 +41,56 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
 
   final TextEditingController _emailController = TextEditingController();
 
-  bool _isLoading = false;
-
-  String? _submissionStatus;
+  bool _isSubmitting = false;
+  bool _isSubmittedSuccessfully = false;
 
   void onEmailSubmit() async {
-  // Check if the form is valid
-  if (_formKey.currentState!.validate()) {
-    // Show loading state
-    setState(() {
-      _isLoading = true;
-      _submissionStatus = null;
-    });
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isSubmitting = true;
+      });
 
-    // Get the email from the controller
-    final email = _emailController.text;
+      // Get the email from the controller
+      final email = _emailController.text;
 
-    // Your API Gateway endpoint
-    final String apiUrl = 'https://55phj1v7dk.execute-api.eu-north-1.amazonaws.com/';
+      // Your API Gateway endpoint
+      final String apiUrl = 'https://55phj1v7dk.execute-api.eu-north-1.amazonaws.com/prod/SubsribeToNewsletter';
 
-    try {
-      // Make the HTTP POST request
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': email}),
-      );
+      try {
+        // Make the HTTP POST request
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({'email': email}),
+        );
+        print('Response status: ${response.statusCode}');
+        print('Response body: ${response.body}');
 
-      // Check if the request was successful
-      if (response.statusCode == 200) {
-        // Update the state to show success
+        // Check if the request was successful
+        if (response.statusCode == 200) {
+          // Update the state to show success
+          setState(() {
+            _isSubmitting = false;
+            _isSubmittedSuccessfully = true;
+          });
+        } else {
+          setState(() {
+            _isSubmitting = false;
+          });
+        }
+      } on TimeoutException {
         setState(() {
-          _submissionStatus = 'Thank you for subscribing!';
+          _isSubmitting = false;
         });
-      } else {
-        // Update the state to show failure
+        print('Request timed out');
+      } catch (e) {
         setState(() {
-          _submissionStatus = 'Failed to subscribe.';
+          _isSubmitting = false;
         });
+        print('Failed to submit: $e');
       }
-    } catch (e) {
-      // Handle any errors that occur during the request
-      setState(() {
-        _submissionStatus = 'An error occurred.';
-      });
-    } finally {
-      // Stop showing the loading state
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +192,7 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
                                       hintText: 'Enter your email',
                                       hintStyle: RheaWebFont.smallFont,
                                     ),
+                                    style: RheaWebFont.regularFont,
                                     validator: (value) {
                                       if (value == null || value.isEmpty || !value.contains('@')) {
                                         return 'Please enter a valid email';
@@ -203,7 +202,7 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: _isLoading ? null : onEmailSubmit,
+                                  onTap: _isSubmitting ? null : onEmailSubmit,
                                   child: Container(
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
@@ -211,11 +210,22 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(12),
-                                      child: SvgPicture.asset(
-                                        RheaWebText.iconPathChevronRight,
-                                        colorFilter:
-                                            const ColorFilter.mode(RheaWebColor.cardBackgroundColor, BlendMode.srcIn),
-                                      ),
+                                      child: _isSubmitting
+                                          ? SizedBox(
+                                              height: 20,
+                                              width: 20,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                                color: RheaWebColor.cardBackgroundColor,
+                                              ),
+                                            )
+                                          : SvgPicture.asset(
+                                              !_isSubmittedSuccessfully
+                                                  ? RheaWebText.iconPathChevronRight
+                                                  : RheaWebText.iconPathCheckSolo,
+                                              colorFilter: const ColorFilter.mode(
+                                                  RheaWebColor.cardBackgroundColor, BlendMode.srcIn),
+                                            ),
                                     ),
                                   ),
                                 ),
@@ -223,11 +233,10 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
                             ),
                           ),
                         ),
-                        if (_isLoading) CircularProgressIndicator(),
-                        if (_submissionStatus != null)
+                        if (_isSubmittedSuccessfully)
                           Padding(
                             padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(_submissionStatus!),
+                            child: Text('Submitted successfully!'),
                           ),
                       ],
                     ),
