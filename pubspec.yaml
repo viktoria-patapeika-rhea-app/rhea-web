@@ -76,7 +76,6 @@ flutter:
   assets:
     - assets/
     - assets/icons/
-    - assets/mock/
     - assets/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
