@@ -4,12 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rhea_ai_website/blocs/app_bar_bloc/footer_bloc.dart';
-import 'package:rhea_ai_website/ui_component/util/rhea_web_color.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/beta_subscription.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/pitch_scroll.dart';
-import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_appbar.dart';
 import 'package:rhea_ai_website/ui_component/view/ui_elements/rhea_web_footer.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class AppPage extends StatefulWidget {
   const AppPage({super.key});
@@ -111,7 +108,7 @@ class _AppPageState extends State<AppPage> {
                                 style: GoogleFonts.orbitron(
                                   color: Colors.white,
                                   fontSize: 12,
-                                  fontWeight: FontWeight.normal,
+                                  fontWeight: FontWeight.w100,
                                 ),
                               ),
                               SizedBox(height: 12),
@@ -124,7 +121,7 @@ class _AppPageState extends State<AppPage> {
                                 style: GoogleFonts.orbitron(
                                   color: Colors.white,
                                   fontSize: 12,
-                                  fontWeight: FontWeight.normal,
+                                  fontWeight: FontWeight.w100,
                                 ),
                               ),
                             ],

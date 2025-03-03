@@ -1,21 +1,13 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:math' show pi;
-import 'package:http/http.dart' as http;
+import 'package:rhea_ai_website/ui_component/view/sections/roadmap.dart';
 
-import 'package:rhea_ai_website/ui_component/util/utils.dart';
 import '../sections/flow_explained.dart';
 import '../sections/mission.dart';
 import '../sections/features.dart';
-import '../sections/statistics.dart';
 import '../sections/technology.dart';
-import '../sections/roadmap.dart';
-import '../sections/to_add.dart';
+import '../sections/statistics.dart';
+import '../sections/mock.dart';
 import 'package:flutter/services.dart';
 
 class PitchScroll extends StatefulWidget {
@@ -30,10 +22,14 @@ class _PitchScrollState extends State<PitchScroll> {
   int currentPage = 0;
 
   final List<Widget> _pages = [
-    FlowExplained(),
     Mission(),
+    StatisticsPage(),
+    FlowExplained(),
+    AppScreenshots(),
     Features(),
-   /* Statistics(),
+    TechnologyPage(),
+    RoadmapPage(),
+    /* Statistics(),
     Technology(),
     Roadmap(),
     ToAdd(),*/
@@ -71,7 +67,6 @@ class _PitchScrollState extends State<PitchScroll> {
         color: Colors.transparent,
         child: Stack(
           children: [
-            
             SizedBox(
               width: deviceSize.width,
               height: deviceSize.height,
@@ -117,10 +112,10 @@ class _PitchScrollState extends State<PitchScroll> {
                     ),
                   ),
                   Transform.translate(
-                    offset: currentPage+1!=1? Offset(96, -24): Offset(80,-24), 
+                    offset: currentPage + 1 != 1 ? Offset(96, -24) : Offset(80, -24),
                     child: Text(
-                      // '/ 07',
-                      '/ 03',
+                      '/ 07',
+                      // '/ 03',
                       style: GoogleFonts.orbitron(
                         color: Color(0xffCFCFCF),
                         fontSize: 24,
@@ -162,7 +157,8 @@ class _PitchScrollState extends State<PitchScroll> {
                   children: [
                     Text(
                       'scroll',
-                      style: GoogleFonts.exo2(color: Color(0xffcfcfcf).withOpacity(0.7), fontSize: 16, fontWeight: FontWeight.w200),
+                      style: GoogleFonts.exo2(
+                          color: Color(0xffcfcfcf).withOpacity(0.7), fontSize: 16, fontWeight: FontWeight.w200),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 6),

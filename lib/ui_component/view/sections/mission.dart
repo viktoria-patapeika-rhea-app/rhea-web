@@ -5,8 +5,12 @@ class Mission extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
+    final screenWidth = deviceSize.width;
+    final titleFontSize = screenWidth < 900 ? 36.0 : 58.0;
+    final descriptionFontSize = screenWidth < 900 ? 14.0 : 18.0;
+
     return Container(
-      padding: EdgeInsets.only(left: 140),
+      padding: EdgeInsets.only(left: screenWidth < 900 ? 40 : 140),
       width: deviceSize.width,
       height: deviceSize.height,
       color: Colors.transparent,
@@ -18,12 +22,11 @@ class Mission extends StatelessWidget {
             textAlign: TextAlign.start,
             text: TextSpan(
               style: GoogleFonts.orbitron(
-                fontSize: 64,
+                fontSize: titleFontSize,
                 color: Colors.white,
               ),
               children: [
                 TextSpan(text: 'EMPOWERING\nHEALTH,\nREDEFINING\nFITNESS'),
-               
               ],
             ),
           ),
@@ -35,7 +38,7 @@ class Mission extends StatelessWidget {
               'Our vision is to bring science-backed, personalized solutions that empower women to embrace their unique hormonal rhythms.\n\n'
               'With a focus on personalization, empowerment, and privacy, Rhea is more than an app—it\'s your health ally.',
               style: GoogleFonts.exo2(
-                fontSize: 18,
+                fontSize: descriptionFontSize,
                 fontWeight: FontWeight.w200,
                 color: Colors.white,
                 height: 1.5,
@@ -47,4 +50,4 @@ class Mission extends StatelessWidget {
       ),
     );
   }
-} 
+}

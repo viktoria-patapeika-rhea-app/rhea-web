@@ -32,8 +32,7 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
 
   final Map<String, String> socialMediaLinks = {
     RheaWebText.iconPathLinkedinLogo: 'https://www.linkedin.com/company/rhea-app/',
-    RheaWebText.iconPathInstagramLogo:
-        'https://www.instagram.com/rhea.app?igsh=MTlic2Y0azZrcXhwMg==',
+    RheaWebText.iconPathInstagramLogo: 'https://www.instagram.com/rhea.app?igsh=MTlic2Y0azZrcXhwMg==',
     RheaWebText.iconPathFacebookLogo: '',
     RheaWebText.iconPathTiktokLogo: 'https://www.tiktok.com/@rheaai_?_t=8p1jkb8hcOn&_r=1'
   };
@@ -96,22 +95,29 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
+    final screenWidth = deviceSize.width;
+    final titleFontSize = screenWidth < 900 ? 28.0 : 36.0;
+    final descriptionFontSize = screenWidth < 900 ? 14.0 : 18.0;
+    final inputLabelFontSize = screenWidth < 900 ? 14.0 : 18.0;
+    final buttonFontSize = screenWidth < 900 ? 14.0 : 18.0;
+    final logoFontSize = screenWidth < 900 ? 28.0 : 36.0;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text('JOIN NEWSLETTER',
-            style: GoogleFonts.orbitron(color: Colors.white, fontSize: 36, fontWeight: FontWeight.w300)),
+            style: GoogleFonts.orbitron(color: Colors.white, fontSize: titleFontSize, fontWeight: FontWeight.w300)),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Text(
             'Get notified about our latest updates and releases.',
-            style: GoogleFonts.exo2(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w300),
+            style: GoogleFonts.exo2(color: Colors.white, fontSize: descriptionFontSize, fontWeight: FontWeight.w200),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 32),
           child: SizedBox(
-            width: deviceSize.width * 0.4,
+            width: screenWidth < 900 ? deviceSize.width * 0.6 : deviceSize.width * 0.4,
             child: Form(
               key: _formKey,
               child: Padding(
@@ -125,8 +131,11 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
                         contentPadding: EdgeInsets.fromLTRB(32, 12, 4, 12),
                         focusedBorder: InputBorder.none,
                         border: InputBorder.none,
-                        label: Text('Enter your email', style: GoogleFonts.exo2(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w300))),
-                    style: RheaWebFont.regularFont,
+                        label: Text('Enter your email',
+                            style: GoogleFonts.exo2(
+                                color: Colors.white, fontSize: inputLabelFontSize, fontWeight: FontWeight.w200))),
+                    style: GoogleFonts.exo2(
+                        color: Colors.white, fontSize: inputLabelFontSize, fontWeight: FontWeight.w200),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -159,7 +168,7 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
                   padding: const EdgeInsets.only(right: 12),
                   child: Text(
                     _isSubmittedSuccessfully ? 'Subscribed!' : 'Subscribe',
-                    style: GoogleFonts.exo2(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w300),
+                    style: GoogleFonts.exo2(color: Colors.white, fontSize: buttonFontSize, fontWeight: FontWeight.w200),
                   ),
                 ),
               ]),
@@ -178,13 +187,17 @@ class _RheaWebFooterState extends State<RheaWebFooter> {
                   Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      child: Text('RHEA', style: GoogleFonts.orbitron(color: Colors.white, fontSize: 36)),
+                      child: Text('RHEA', style: GoogleFonts.orbitron(color: Colors.white, fontSize: logoFontSize)),
                     ),
                     Row(children: [
                       SvgPicture.asset(RheaWebText.iconPathEmail),
                       Padding(
                         padding: const EdgeInsets.only(left: 12),
-                        child: Text(RheaWebText.footerContactEmail, style: RheaWebFont.smallFont),
+                        child: Text(
+                          RheaWebText.footerContactEmail,
+                          style: GoogleFonts.exo2(
+                              color: Colors.white, fontSize: descriptionFontSize, fontWeight: FontWeight.w200),
+                        ),
                       ),
                     ]),
                   ]),

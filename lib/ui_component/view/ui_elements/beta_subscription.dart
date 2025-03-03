@@ -27,8 +27,7 @@ class _BetaSubscriptionState extends State<BetaSubscription> {
 
       final email = _emailController.text;
       final name = _nameController.text;
-      final String apiUrl =
-          'https://55phj1v7dk.execute-api.eu-north-1.amazonaws.com/prod/SubsribeToNewsletter';
+      final String apiUrl = 'https://55phj1v7dk.execute-api.eu-north-1.amazonaws.com/prod/SubsribeToNewsletter';
 
       try {
         final response = await http.post(
@@ -69,28 +68,28 @@ class _BetaSubscriptionState extends State<BetaSubscription> {
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
+    final screenWidth = deviceSize.width;
+    final titleFontSize = screenWidth < 900 ? 28.0 : 36.0;
+    final descriptionFontSize = screenWidth < 900 ? 14.0 : 18.0;
+    final inputLabelFontSize = screenWidth < 900 ? 14.0 : 18.0;
+    final buttonFontSize = screenWidth < 900 ? 16.0 : 20.0;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text('JOIN BETA TESTER COMMUNITY',
-            style: GoogleFonts.orbitron(
-                color: Colors.white,
-                fontSize: 36,
-                fontWeight: FontWeight.w300)),
+            style: GoogleFonts.orbitron(color: Colors.white, fontSize: titleFontSize, fontWeight: FontWeight.w300)),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Text(
             'Join our beta program and shape the evolution of personalized fitness.',
-            style: GoogleFonts.exo2(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.w300),
+            style: GoogleFonts.exo2(color: Colors.white, fontSize: descriptionFontSize, fontWeight: FontWeight.w200),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 32),
           child: SizedBox(
-            width: deviceSize.width * 0.4,
+            width: screenWidth < 900 ? deviceSize.width * 0.6 : deviceSize.width * 0.4,
             child: Form(
               key: _formKey,
               child: Column(
@@ -98,9 +97,8 @@ class _BetaSubscriptionState extends State<BetaSubscription> {
                   Padding(
                     padding: const EdgeInsets.only(top: 32),
                     child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8)),
+                      decoration:
+                          BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
                       child: TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
@@ -109,10 +107,9 @@ class _BetaSubscriptionState extends State<BetaSubscription> {
                             border: InputBorder.none,
                             label: Text('Enter your name',
                                 style: GoogleFonts.exo2(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w300))),
-                        style: RheaWebFont.regularFont,
+                                    color: Colors.white, fontSize: inputLabelFontSize, fontWeight: FontWeight.w200))),
+                        style: GoogleFonts.exo2(
+                            color: Colors.white, fontSize: inputLabelFontSize, fontWeight: FontWeight.w200),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your name';
@@ -125,9 +122,8 @@ class _BetaSubscriptionState extends State<BetaSubscription> {
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8)),
+                      decoration:
+                          BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
                       child: TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
@@ -136,16 +132,14 @@ class _BetaSubscriptionState extends State<BetaSubscription> {
                             border: InputBorder.none,
                             label: Text('Enter your email',
                                 style: GoogleFonts.exo2(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w300))),
-                        style: RheaWebFont.regularFont,
+                                    color: Colors.white, fontSize: inputLabelFontSize, fontWeight: FontWeight.w200))),
+                        style: GoogleFonts.exo2(
+                            color: Colors.white, fontSize: inputLabelFontSize, fontWeight: FontWeight.w200),
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
-                          } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
-                              .hasMatch(value)) {
+                          } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
                             return 'Please enter a valid email address';
                           }
                           return null;
@@ -176,13 +170,9 @@ class _BetaSubscriptionState extends State<BetaSubscription> {
                         : _isSubmittedSuccessfully
                             ? 'Submitted Successfully'
                             : 'Submit',
-                    style: GoogleFonts.exo2(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w300),
+                    style: GoogleFonts.exo2(color: Colors.white, fontSize: buttonFontSize, fontWeight: FontWeight.w300),
                   ),
-                  if (_isSubmitting)
-                    const SizedBox(width: 10),
+                  if (_isSubmitting) const SizedBox(width: 10),
                   if (_isSubmitting)
                     const CircularProgressIndicator(
                       color: Colors.white,
@@ -195,4 +185,4 @@ class _BetaSubscriptionState extends State<BetaSubscription> {
       ],
     );
   }
-} 
+}
